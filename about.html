@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Hisaab Kitab</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1SSYQEN5KC');
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root{
+    --cover:#16332B; --paper:#FBF7ED; --paper-line:#DED2AC;
+    --ink:#221D14; --ink-soft:#5B5546; --gold:#A9791F;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--cover); color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px;
+  }
+  .book{
+    max-width:680px; width:100%; background:var(--paper); border-radius:3px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55); padding:44px 40px;
+  }
+  a{ color:var(--gold); }
+  .mark{
+    display:inline-block; font-family:'Lora', serif; font-weight:600; font-size:14px;
+    letter-spacing:0.08em; color:var(--gold); text-decoration:none; margin-bottom:20px;
+  }
+  h1{ font-family:'Lora', serif; font-size:30px; margin:0 0 18px; }
+  p{ font-size:15px; line-height:1.7; color:var(--ink-soft); margin:0 0 16px; }
+  strong{ color:var(--ink); }
+  hr{ border:none; border-top:1px solid var(--paper-line); margin:26px 0; }
+</style>
+</head>
+<body>
+  <div class="book">
+    <a class="mark" href="index.html">← Hisaab Kitab</a>
+    <h1>About this site</h1>
+    <p>Hisaab Kitab is a set of free calculators built for everyday financial questions in Pakistan — Zakat, income tax, loan installments, and take-home salary. The goal is simple: give quick, clear numbers without needing to do the math by hand or dig through FBR notifications.</p>
+    <p>The income tax calculator is kept up to date with the latest FBR salary slabs. The Zakat and EMI calculators use standard, widely accepted calculation methods.</p>
+    <hr>
+    <p><strong>A note on accuracy:</strong> Every calculator here gives an estimate based on the information you provide and publicly available rules. It isn't a substitute for advice from a qualified tax consultant, accountant, or religious scholar for Zakat matters. Always verify important financial or religious decisions with a professional.</p>
+    <hr>
+    <p><strong>Contact:</strong> Questions, corrections, or suggestions for new calculators are welcome. Reach out at <a href="mailto:hello@hisaabkitab.pk">hello@hisaabkitab.pk</a>.</p>
+  </div>
+</body>
+</html>

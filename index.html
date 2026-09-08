@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1SSYQEN5KC');
+</script>
+<title>Hisaab Kitab — Pakistan Finance Calculators</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --cover:#16332B;
+    --cover-deep:#0E241E;
+    --paper:#FBF7ED;
+    --paper-line:#DED2AC;
+    --ink:#221D14;
+    --ink-soft:#5B5546;
+    --gold:#A9791F;
+    --gold-deep:#82600F;
+    --stamp:#A63D2F;
+    --ok:#2F6B4F;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cover);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.04), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(0,0,0,0.25), transparent 55%);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 16px 64px;
+  }
+
+  .num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Header / book cover ---------- */
+  .titleblock{
+    max-width:760px;
+    width:100%;
+    text-align:left;
+    color:#EFE8D3;
+    margin-bottom:22px;
+    padding:0 6px;
+  }
+  .titleblock .mark{
+    display:inline-block;
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.08em;
+    color:var(--gold);
+    border:1px solid rgba(169,121,31,0.55);
+    padding:3px 10px;
+    border-radius:2px;
+    margin-bottom:14px;
+  }
+  .titleblock h1{
+    font-family:'Lora', serif;
+    font-weight:700;
+    font-size:clamp(32px, 5vw, 46px);
+    margin:0 0 8px;
+    color:#F7F1DE;
+    line-height:1.1;
+  }
+  .titleblock p{
+    font-size:15px;
+    line-height:1.55;
+    color:#C9C2AA;
+    max-width:52ch;
+    margin:0;
+  }
+
+  /* ---------- Ledger book ---------- */
+  .book{
+    max-width:760px;
+    width:100%;
+    background:var(--paper);
+    border-radius:3px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55), 0 2px 0 rgba(0,0,0,0.2);
+    position:relative;
+    overflow:hidden;
+  }
+  .book::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:46px;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px,
+      transparent 1px, transparent 46px
+    );
+    opacity:0.5;
+    pointer-events:none;
+  }
+
+  /* Tabs styled like ledger index dividers */
+  .tabs{
+    display:flex;
+    background:var(--cover-deep);
+    padding:0 14px;
+    overflow-x:auto;
+  }
+  .tab{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:#B9AF8F;
+    background:transparent;
+    border:none;
+    padding:16px 18px 13px;
+    cursor:pointer;
+    position:relative;
+    white-space:nowrap;
+  }
+  .tab .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--gold);
+    margin-right:7px;
+    opacity:0.85;
+  }
+  .tab[aria-selected="true"]{
+    color:var(--paper);
+    background:var(--paper);
+    border-radius:4px 4px 0 0;
+  }
+  .tab[aria-selected="true"] .idx{ color:var(--gold-deep); }
+
+  .page{ padding:38px 40px 34px; position:relative; }
+  .page-head{ margin-bottom:26px; padding-left:52px; }
+  .page-head h2{
+    font-family:'Lora', serif;
+    font-size:26px;
+    font-weight:700;
+    margin:0 0 6px;
+  }
+  .page-head p{
+    margin:0;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:60ch;
+    line-height:1.5;
+  }
+
+  form{ padding-left:52px; }
+
+  .row{
+    display:grid;
+    grid-template-columns: 1fr 200px;
+    align-items:baseline;
+    gap:16px;
+    padding:13px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .row label{
+    font-size:14.5px;
+    color:var(--ink);
+    font-weight:500;
+  }
+  .row .hint{
+    display:block;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-weight:400;
+    margin-top:2px;
+  }
+  .row .field{
+    display:flex;
+    align-items:center;
+    border-bottom:1.5px solid var(--ink);
+    padding-bottom:3px;
+  }
+  .row .field .prefix{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-right:6px;
+  }
+  .row input, .row select{
+    border:none;
+    background:transparent;
+    outline:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    color:var(--ink);
+    width:100%;
+    text-align:right;
+    padding:2px 0;
+  }
+  .row select{ text-align:left; cursor:pointer; }
+
+  .btn{
+    margin:26px 0 0;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--paper);
+    background:var(--cover);
+    border:none;
+    padding:13px 26px;
+    border-radius:2px;
+    cursor:pointer;
+    letter-spacing:0.01em;
+  }
+  .btn:hover{ background:var(--cover-deep); }
+
+  /* ---------- Result stamp ---------- */
+  .result{
+    margin:30px 52px 0;
+    padding-top:22px;
+    border-top:2px solid var(--ink);
+    display:none;
+  }
+  .result.show{ display:block; animation: rise 0.45s ease; }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .result-main{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .result-main .label{
+    font-family:'Lora', serif;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .result-main .amount{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:34px;
+    color:var(--stamp);
+    position:relative;
+  }
+  .result-main .amount::after{
+    content:"";
+    position:absolute;
+    left:-8px; right:-8px; bottom:2px; top:2px;
+    border:2px solid var(--stamp);
+    border-radius:3px;
+    opacity:0.35;
+    transform:rotate(-1.2deg);
+    pointer-events:none;
+  }
+  .breakdown{
+    margin-top:20px;
+    width:100%;
+    border-collapse:collapse;
+  }
+  .breakdown tr td{
+    padding:8px 0;
+    font-size:13.5px;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .breakdown tr td:first-child{ color:var(--ink-soft); }
+  .breakdown tr td:last-child{
+    font-family:'IBM Plex Mono', monospace;
+    text-align:right;
+    color:var(--ink);
+  }
+  .breakdown tr.total td{
+    border-bottom:none;
+    padding-top:12px;
+    font-weight:600;
+  }
+  .note{
+    margin:18px 52px 0;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    padding-bottom:8px;
+  }
+
+  .articles{
+    max-width:760px;
+    width:100%;
+    background:var(--paper);
+    border-radius:3px;
+    box-shadow: 0 20px 40px -18px rgba(0,0,0,0.5);
+    margin-top:26px;
+    padding:30px 40px 12px;
+  }
+  .articles h3{
+    font-family:'Lora', serif;
+    font-size:19px;
+    margin:0 0 4px;
+  }
+  .articles .sub{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+  }
+  .article-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    padding:16px 0;
+    border-bottom:1px solid var(--paper-line);
+    text-decoration:none;
+    color:inherit;
+  }
+  .article-row:last-child{ border-bottom:none; }
+  .article-row .a-title{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--ink);
+  }
+  .article-row .a-desc{
+    display:block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:400;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:3px;
+  }
+  .article-row .a-arrow{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--gold);
+    font-size:14px;
+    flex-shrink:0;
+  }
+
+  .live-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ok);
+    background:rgba(47,107,79,0.09);
+    padding:4px 10px;
+    border-radius:20px;
+    margin-left:10px;
+  }
+  .live-badge.stale{ color:var(--ink-soft); background:rgba(91,85,70,0.08); }
+  .live-badge .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--ok); flex-shrink:0;
+  }
+  .live-badge.stale .dot{ background:var(--ink-soft); }
+
+  .swap-row{
+    display:grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap:12px;
+    align-items:end;
+    padding:13px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .swap-row .field{
+    border-bottom:1.5px solid var(--ink);
+    padding-bottom:3px;
+  }
+  .swap-row select{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+    border:none; background:transparent; outline:none;
+    width:100%; text-align:left; cursor:pointer; color:var(--ink);
+  }
+  .swap-btn{
+    background:var(--paper-line);
+    border:none;
+    width:30px; height:30px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:14px;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .swap-btn:hover{ background:var(--gold); color:var(--paper); }
+
+  .metal-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    padding-left:52px;
+    margin-bottom:8px;
+  }
+  .metal-card{
+    border:1px solid var(--paper-line);
+    border-radius:3px;
+    padding:16px 18px;
+  }
+  .metal-card .m-label{
+    font-family:'Lora', serif;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .metal-card .m-price{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:20px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .metal-card .m-unit{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .key-setup{
+    margin:0 52px 22px;
+    padding:16px 18px;
+    background:rgba(166,61,47,0.06);
+    border-left:3px solid var(--stamp);
+    border-radius:2px;
+    font-size:13.5px;
+    color:var(--ink);
+    line-height:1.6;
+  }
+  .key-setup a{ color:var(--stamp); font-weight:600; }
+  .key-setup code{
+    background:rgba(0,0,0,0.06);
+    padding:1px 5px;
+    border-radius:2px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+  }
+
+  @media (max-width:600px){
+    .metal-cards{ grid-template-columns:1fr; padding-left:0; }
+    .swap-row{ grid-template-columns:1fr; }
+    .swap-btn{ justify-self:center; transform:rotate(90deg); }
+  }
+
+  footer{
+    max-width:760px;
+    width:100%;
+    color:#8F8975;
+    font-size:12px;
+    text-align:center;
+    line-height:1.6;
+    margin-top:28px;
+    padding:0 16px;
+  }
+  footer a{ color:var(--gold); }
+
+  @media (max-width:600px){
+    .page{ padding:28px 18px 26px; }
+    .page-head{ padding-left:0; }
+    form{ padding-left:0; }
+    .row{ grid-template-columns:1fr; gap:8px; }
+    .row .field{ padding-bottom:5px; }
+    .result{ margin:26px 0 0; }
+    .note{ margin:16px 0 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="titleblock">
+    <span class="mark">Hisaab Kitab</span>
+    <h1>Your money, worked out.</h1>
+    <p>Four calculators built for Pakistan — Zakat, salary tax, loan installments, and take-home pay. Updated for FY 2026–27 FBR slabs.</p>
+  </div>
+
+  <div class="book">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-tab="zakat"><span class="idx">01</span>Zakat</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="tax"><span class="idx">02</span>Income Tax</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="emi"><span class="idx">03</span>EMI</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="salary"><span class="idx">04</span>Salary</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="currency"><span class="idx">05</span>Currency</button>
+    </div>
+
+    <!-- ZAKAT -->
+    <section class="page" id="page-zakat">
+      <div class="page-head">
+        <h2>Zakat calculator</h2>
+        <p>Zakat is due at 2.5% on wealth held for a full lunar year, above the nisab threshold. Enter what you own below.</p>
+      </div>
+      <form id="form-zakat">
+        <div class="row">
+          <label>Cash in hand &amp; bank balances<span class="hint">Savings, current accounts, cash at home</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="z-cash" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Gold &amp; silver value<span class="hint">Current market value of jewellery and bullion held</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="z-gold" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Business stock &amp; receivables<span class="hint">Saleable inventory, money owed to you that's collectible</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="z-stock" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Other investments<span class="hint">Stocks, savings certificates, crypto held for a year</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="z-inv" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Debts you owe<span class="hint">Short-term liabilities due, subtracted from your total</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="z-debt" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Nisab threshold<span class="hint">Check today's value online (612.36g silver or 87.48g gold) — silver nisab is the safer default</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="z-nisab" placeholder="e.g. 175000" min="0"></div>
+        </div>
+        <button type="button" class="btn" onclick="calcZakat()">Calculate Zakat</button>
+      </form>
+      <div class="result" id="result-zakat">
+        <div class="result-main">
+          <span class="label">Zakat payable</span>
+          <span class="amount num" id="zakat-amount">Rs 0</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Total zakatable wealth</td><td class="num" id="zakat-total">Rs 0</td></tr>
+          <tr><td>Less: debts owed</td><td class="num" id="zakat-lessdebt">Rs 0</td></tr>
+          <tr class="total"><td>Net zakatable wealth</td><td class="num" id="zakat-net">Rs 0</td></tr>
+        </table>
+      </div>
+      <p class="note" id="zakat-note"></p>
+    </section>
+
+    <!-- INCOME TAX -->
+    <section class="page" id="page-tax" style="display:none">
+      <div class="page-head">
+        <h2>Salary income tax</h2>
+        <p>FBR slabs for salaried individuals, FY 2026–27 (effective 1 July 2026). Enter your gross salary before deductions.</p>
+      </div>
+      <form id="form-tax">
+        <div class="row">
+          <label>Salary period</label>
+          <div class="field">
+            <select id="t-period">
+              <option value="monthly">Monthly gross</option>
+              <option value="annual">Annual gross</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <label>Gross salary<span class="hint">Before tax, before any deductions</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="t-salary" placeholder="0" min="0"></div>
+        </div>
+        <button type="button" class="btn" onclick="calcTax()">Calculate tax</button>
+      </form>
+      <div class="result" id="result-tax">
+        <div class="result-main">
+          <span class="label">Annual income tax</span>
+          <span class="amount num" id="tax-amount">Rs 0</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Annual gross income</td><td class="num" id="tax-gross">Rs 0</td></tr>
+          <tr><td>Tax slab applied</td><td class="num" id="tax-slab">—</td></tr>
+          <tr><td>Monthly tax deduction</td><td class="num" id="tax-monthly">Rs 0</td></tr>
+          <tr class="total"><td>Annual take-home</td><td class="num" id="tax-nethome">Rs 0</td></tr>
+        </table>
+      </div>
+      <p class="note">Based on FBR's Finance Act 2026 slabs for salaried persons, effective 1 July 2026. Does not include EOBI, provident fund, or other employer-specific deductions — check your payslip for the exact net figure.</p>
+    </section>
+
+    <!-- EMI -->
+    <section class="page" id="page-emi" style="display:none">
+      <div class="page-head">
+        <h2>Loan / installment calculator</h2>
+        <p>Work out your monthly installment for any loan, car finance, or buy-now-pay-later plan.</p>
+      </div>
+      <form id="form-emi">
+        <div class="row">
+          <label>Loan amount<span class="hint">Principal you're borrowing or financing</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="e-principal" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Annual interest / markup rate<span class="hint">As quoted by the bank or dealer</span></label>
+          <div class="field"><input type="number" inputmode="decimal" id="e-rate" placeholder="0" min="0" step="0.1"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div>
+        </div>
+        <div class="row">
+          <label>Tenure<span class="hint">Length of the loan, in months</span></label>
+          <div class="field"><input type="number" inputmode="decimal" id="e-months" placeholder="0" min="1"><span class="prefix" style="margin-left:6px;margin-right:0">months</span></div>
+        </div>
+        <button type="button" class="btn" onclick="calcEmi()">Calculate installment</button>
+      </form>
+      <div class="result" id="result-emi">
+        <div class="result-main">
+          <span class="label">Monthly installment</span>
+          <span class="amount num" id="emi-amount">Rs 0</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Principal borrowed</td><td class="num" id="emi-principal">Rs 0</td></tr>
+          <tr><td>Total interest paid</td><td class="num" id="emi-interest">Rs 0</td></tr>
+          <tr class="total"><td>Total repayment</td><td class="num" id="emi-total">Rs 0</td></tr>
+        </table>
+      </div>
+      <p class="note">Assumes a standard reducing-balance installment plan with equal monthly payments. Actual bank offers may include processing fees or insurance not shown here.</p>
+    </section>
+
+    <!-- SALARY / TAKE-HOME -->
+    <section class="page" id="page-salary" style="display:none">
+      <div class="page-head">
+        <h2>Take-home salary</h2>
+        <p>See your monthly in-hand pay after FBR income tax, based on FY 2026–27 slabs.</p>
+      </div>
+      <form id="form-salary">
+        <div class="row">
+          <label>Monthly gross salary<span class="hint">Your total monthly package before deductions</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="s-salary" placeholder="0" min="0"></div>
+        </div>
+        <button type="button" class="btn" onclick="calcSalary()">Calculate take-home</button>
+      </form>
+      <div class="result" id="result-salary">
+        <div class="result-main">
+          <span class="label">Monthly take-home</span>
+          <span class="amount num" id="salary-amount">Rs 0</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Monthly gross</td><td class="num" id="salary-gross">Rs 0</td></tr>
+          <tr><td>Monthly income tax</td><td class="num" id="salary-tax">Rs 0</td></tr>
+          <tr class="total"><td>Effective tax rate</td><td class="num" id="salary-rate">0%</td></tr>
+        </table>
+      </div>
+      <p class="note">Shows income tax only. Your actual in-hand pay may differ slightly after EOBI, provident fund, or other employer deductions.</p>
+    </section>
+
+    <!-- CURRENCY CONVERTER -->
+    <section class="page" id="page-currency" style="display:none">
+      <div class="page-head">
+        <h2>Currency converter <span class="live-badge" id="fx-badge"><span class="dot"></span>Live rates</span></h2>
+        <p>Convert between PKR and major currencies using live exchange rates, updated each time you open this tab.</p>
+      </div>
+      <form id="form-currency">
+        <div class="swap-row">
+          <div>
+            <label style="font-size:13px;color:var(--ink-soft);display:block;margin-bottom:6px;">Amount</label>
+            <div class="field"><input type="number" inputmode="decimal" id="fx-amount" value="1" min="0"></div>
+          </div>
+          <button type="button" class="swap-btn" id="fx-swap" title="Swap currencies">⇄</button>
+          <div>
+            <label style="font-size:13px;color:var(--ink-soft);display:block;margin-bottom:6px;">Currency</label>
+            <div class="field">
+              <select id="fx-from">
+                <option value="PKR">PKR — Pakistani Rupee</option>
+                <option value="USD">USD — US Dollar</option>
+                <option value="GBP">GBP — British Pound</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="SAR">SAR — Saudi Riyal</option>
+                <option value="AED">AED — UAE Dirham</option>
+                <option value="INR">INR — Indian Rupee</option>
+                <option value="CNY">CNY — Chinese Yuan</option>
+                <option value="AUD">AUD — Australian Dollar</option>
+                <option value="CAD">CAD — Canadian Dollar</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label>Convert to</label>
+          <div class="field">
+            <select id="fx-to">
+              <option value="USD">USD — US Dollar</option>
+              <option value="PKR">PKR — Pakistani Rupee</option>
+              <option value="GBP">GBP — British Pound</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="SAR">SAR — Saudi Riyal</option>
+              <option value="AED">AED — UAE Dirham</option>
+              <option value="INR">INR — Indian Rupee</option>
+              <option value="CNY">CNY — Chinese Yuan</option>
+              <option value="AUD">AUD — Australian Dollar</option>
+              <option value="CAD">CAD — Canadian Dollar</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="result show" id="result-currency">
+        <div class="result-main">
+          <span class="label" id="fx-label">1 PKR =</span>
+          <span class="amount num" id="fx-amount-out">—</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Exchange rate</td><td class="num" id="fx-rate">—</td></tr>
+          <tr><td>Rates last updated</td><td class="num" id="fx-updated">—</td></tr>
+        </table>
+      </div>
+      <p class="note">Rates are sourced live from a public exchange-rate feed on each page load and are indicative — banks and exchange counters add their own margin, so your actual rate will differ slightly.</p>
+    </section>
+  </div>
+
+  <div class="articles">
+    <h3>Guides</h3>
+    <p class="sub">Plain-language explainers to go with the calculators.</p>
+    <a class="article-row" href="tax-slabs-2026-27.html">
+      <span>
+        <span class="a-title">FBR income tax slabs 2026-27 explained</span>
+        <span class="a-desc">What changed this year, the full slab table, and a worked example.</span>
+      </span>
+      <span class="a-arrow">→</span>
+    </a>
+  </div>
+
+  <footer>
+    Estimates only — not professional tax, zakat, or financial advice. Verify figures with FBR, your bank, or a qualified advisor before making decisions.<br>
+    Hisaab Kitab · built for everyday use in Pakistan · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a>
+  </footer>
+
+<script>
+  // ---------- Tab switching ----------
+  const tabs = document.querySelectorAll('.tab');
+  const pages = { zakat:'page-zakat', tax:'page-tax', emi:'page-emi', salary:'page-salary', currency:'page-currency' };
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      tabs.forEach(t=>t.setAttribute('aria-selected','false'));
+      tab.setAttribute('aria-selected','true');
+      Object.values(pages).forEach(id=>document.getElementById(id).style.display='none');
+      document.getElementById(pages[tab.dataset.tab]).style.display='block';
+      if(tab.dataset.tab === 'currency') loadFx();
+    });
+  });
+
+  function fmt(n){
+    n = Math.round(n);
+    return 'Rs ' + n.toLocaleString('en-PK');
+  }
+
+  // ---------- Zakat ----------
+  function calcZakat(){
+    const cash = +document.getElementById('z-cash').value || 0;
+    const gold = +document.getElementById('z-gold').value || 0;
+    const stock = +document.getElementById('z-stock').value || 0;
+    const inv = +document.getElementById('z-inv').value || 0;
+    const debt = +document.getElementById('z-debt').value || 0;
+    const nisab = +document.getElementById('z-nisab').value || 0;
+
+    const total = cash + gold + stock + inv;
+    const net = Math.max(total - debt, 0);
+    const result = document.getElementById('result-zakat');
+    const note = document.getElementById('zakat-note');
+
+    document.getElementById('zakat-total').textContent = fmt(total);
+    document.getElementById('zakat-lessdebt').textContent = fmt(debt);
+    document.getElementById('zakat-net').textContent = fmt(net);
+
+    if(nisab > 0 && net < nisab){
+      document.getElementById('zakat-amount').textContent = 'Rs 0';
+      note.textContent = 'Your net wealth is below the nisab threshold you entered, so Zakat is not obligatory this year.';
+    } else {
+      const zakat = net * 0.025;
+      document.getElementById('zakat-amount').textContent = fmt(zakat);
+      note.textContent = nisab > 0
+        ? 'This is 2.5% of your net zakatable wealth, since it is above the nisab you entered.'
+        : 'This is 2.5% of your net zakatable wealth. Enter a nisab value above to check if Zakat is obligatory this year.';
+    }
+    result.classList.add('show');
+  }
+
+  // ---------- Tax engine (FY 2026-27 salaried slabs) ----------
+  const slabs = [
+    { upto: 600000,      rate: 0,    base: 0 },
+    { upto: 1200000,     rate: 0.01, base: 0 },
+    { upto: 2200000,     rate: 0.11, base: 6000 },
+    { upto: 3200000,     rate: 0.20, base: 116000 },
+    { upto: 4100000,     rate: 0.25, base: 316000 },
+    { upto: 5600000,     rate: 0.29, base: 541000 },
+    { upto: 7000000,     rate: 0.32, base: 976000 },
+    { upto: Infinity,    rate: 0.35, base: 1424000 }
+  ];
+  const slabFloors = [0,600000,1200000,2200000,3200000,4100000,5600000,7000000];
+
+  function annualTax(annual){
+    for(let i=0;i<slabs.length;i++){
+      if(annual <= slabs[i].upto){
+        const floor = slabFloors[i];
+        const tax = slabs[i].base + (annual - floor) * slabs[i].rate;
+        return { tax: Math.max(tax,0), rate: slabs[i].rate, index:i };
+      }
+    }
+  }
+
+  const slabLabels = ['0% (exempt)','1%','11%','20%','25%','29%','32%','35%'];
+
+  function calcTax(){
+    const period = document.getElementById('t-period').value;
+    let salary = +document.getElementById('t-salary').value || 0;
+    const annual = period === 'monthly' ? salary * 12 : salary;
+    const { tax, index } = annualTax(annual);
+    const monthlyTax = tax / 12;
+
+    document.getElementById('tax-amount').textContent = fmt(tax);
+    document.getElementById('tax-gross').textContent = fmt(annual);
+    document.getElementById('tax-slab').textContent = slabLabels[index];
+    document.getElementById('tax-monthly').textContent = fmt(monthlyTax);
+    document.getElementById('tax-nethome').textContent = fmt(annual - tax);
+    document.getElementById('result-tax').classList.add('show');
+  }
+
+  // ---------- EMI ----------
+  function calcEmi(){
+    const p = +document.getElementById('e-principal').value || 0;
+    const annualRate = +document.getElementById('e-rate').value || 0;
+    const months = +document.getElementById('e-months').value || 0;
+    const r = (annualRate/100)/12;
+
+    let emi = 0;
+    if(months > 0){
+      emi = r === 0 ? p/months : (p * r * Math.pow(1+r, months)) / (Math.pow(1+r, months) - 1);
+    }
+    const total = emi * months;
+    const interest = total - p;
+
+    document.getElementById('emi-amount').textContent = fmt(emi);
+    document.getElementById('emi-principal').textContent = fmt(p);
+    document.getElementById('emi-interest').textContent = fmt(interest);
+    document.getElementById('emi-total').textContent = fmt(total);
+    document.getElementById('result-emi').classList.add('show');
+  }
+
+  // ---------- Salary / take-home ----------
+  function calcSalary(){
+    const gross = +document.getElementById('s-salary').value || 0;
+    const annual = gross * 12;
+    const { tax } = annualTax(annual);
+    const monthlyTax = tax/12;
+    const netMonthly = gross - monthlyTax;
+    const effRate = gross > 0 ? (monthlyTax/gross*100) : 0;
+
+    document.getElementById('salary-amount').textContent = fmt(netMonthly);
+    document.getElementById('salary-gross').textContent = fmt(gross);
+    document.getElementById('salary-tax').textContent = fmt(monthlyTax);
+    document.getElementById('salary-rate').textContent = effRate.toFixed(1) + '%';
+    document.getElementById('result-salary').classList.add('show');
+  }
+
+  // ---------- Currency converter (live, no API key needed) ----------
+  let fxRates = null;
+  let fxLoaded = false;
+
+  async function loadFx(){
+    if(fxLoaded) return;
+    const badge = document.getElementById('fx-badge');
+    try{
+      const res = await fetch('https://open.er-api.com/v6/latest/USD');
+      const data = await res.json();
+      if(data && data.rates){
+        fxRates = data.rates;
+        fxRates.USD = 1;
+        fxLoaded = true;
+        badge.classList.remove('stale');
+        badge.querySelector('.dot');
+        document.getElementById('fx-updated').textContent = data.time_last_update_utc
+          ? new Date(data.time_last_update_utc).toLocaleDateString('en-PK', {day:'numeric', month:'short', year:'numeric'})
+          : 'just now';
+        calcCurrency();
+      } else {
+        throw new Error('bad response');
+      }
+    } catch(e){
+      badge.classList.add('stale');
+      badge.textContent = '';
+      const dot = document.createElement('span'); dot.className='dot';
+      badge.appendChild(dot);
+      badge.appendChild(document.createTextNode('Rates unavailable — try again shortly'));
+    }
+  }
+
+  function calcCurrency(){
+    if(!fxRates) return;
+    const amount = +document.getElementById('fx-amount').value || 0;
+    const from = document.getElementById('fx-from').value;
+    const to = document.getElementById('fx-to').value;
+    if(!fxRates[from] || !fxRates[to]) return;
+
+    const amountInUsd = amount / fxRates[from];
+    const converted = amountInUsd * fxRates[to];
+    const rate = fxRates[to] / fxRates[from];
+
+    document.getElementById('fx-label').textContent = `${amount || 0} ${from} =`;
+    document.getElementById('fx-amount-out').textContent = converted.toLocaleString('en-PK', {maximumFractionDigits:2}) + ' ' + to;
+    document.getElementById('fx-rate').textContent = `1 ${from} = ${rate.toLocaleString('en-PK', {maximumFractionDigits:4})} ${to}`;
+  }
+
+  document.getElementById('fx-swap').addEventListener('click', ()=>{
+    const fromSel = document.getElementById('fx-from');
+    const toSel = document.getElementById('fx-to');
+    const tmp = fromSel.value;
+    fromSel.value = toSel.value;
+    toSel.value = tmp;
+    calcCurrency();
+  });
+  ['fx-amount','fx-from','fx-to'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', calcCurrency);
+  });
+
+  // ---------- Auto-calculate as you type ----------
+  const autoCalcFields = {
+    'z-cash':calcZakat, 'z-gold':calcZakat, 'z-stock':calcZakat, 'z-inv':calcZakat, 'z-debt':calcZakat, 'z-nisab':calcZakat,
+    't-period':calcTax, 't-salary':calcTax,
+    'e-principal':calcEmi, 'e-rate':calcEmi, 'e-months':calcEmi,
+    's-salary':calcSalary
+  };
+  Object.keys(autoCalcFields).forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', ()=>{ if(el.value !== '') autoCalcFields[id](); });
+  });
+</script>
+</body>
+</html>

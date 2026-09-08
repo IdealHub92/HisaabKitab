@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Loan Calculator Pakistan — Monthly Installment &amp; Total Cost | Hisaab Kitab</title>
+<meta name="description" content="Calculate your monthly car loan installment in Pakistan. Enter vehicle price, down payment, tenure and markup rate to see your exact EMI, total interest, and total cost.">
+<meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1SSYQEN5KC');
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root{
+    --cover:#16332B; --cover-deep:#0E241E; --paper:#FBF7ED; --paper-line:#DED2AC;
+    --ink:#221D14; --ink-soft:#5B5546; --gold:#A9791F; --gold-deep:#82600F; --stamp:#A63D2F;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--cover);
+    background-image: radial-gradient(ellipse at top left, rgba(255,255,255,0.04), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(0,0,0,0.25), transparent 55%);
+    color:var(--ink); font-family:'IBM Plex Sans', sans-serif; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px;
+  }
+  .num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+
+  .titleblock{ max-width:700px; width:100%; text-align:left; color:#EFE8D3; margin-bottom:22px; padding:0 6px; }
+  .titleblock .mark{
+    display:inline-block; font-family:'Lora', serif; font-weight:600; font-size:14px;
+    letter-spacing:0.08em; color:var(--gold); text-decoration:none; margin-bottom:14px;
+  }
+  .titleblock h1{
+    font-family:'Lora', serif; font-weight:700; font-size:clamp(26px, 4.5vw, 36px);
+    margin:0 0 8px; color:#F7F1DE; line-height:1.2;
+  }
+  .titleblock p{ font-size:15px; line-height:1.55; color:#C9C2AA; max-width:56ch; margin:0; }
+
+  .book{
+    max-width:700px; width:100%; background:var(--paper); border-radius:3px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55), 0 2px 0 rgba(0,0,0,0.2);
+    position:relative; overflow:hidden;
+  }
+  .book::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:46px;
+    background: repeating-linear-gradient(to right, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 46px);
+    opacity:0.5; pointer-events:none;
+  }
+  .page{ padding:36px 40px 34px; position:relative; }
+  form{ padding-left:52px; }
+
+  .row{
+    display:grid; grid-template-columns: 1fr 200px; align-items:baseline;
+    gap:16px; padding:13px 0; border-bottom:1px solid var(--paper-line);
+  }
+  .row label{ font-size:14.5px; color:var(--ink); font-weight:500; }
+  .row .hint{ display:block; font-size:12.5px; color:var(--ink-soft); font-weight:400; margin-top:2px; }
+  .row .field{ display:flex; align-items:center; border-bottom:1.5px solid var(--ink); padding-bottom:3px; }
+  .row .field .prefix{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft); margin-right:6px; }
+  .row input, .row select{
+    border:none; background:transparent; outline:none; font-family:'IBM Plex Mono', monospace;
+    font-size:16px; color:var(--ink); width:100%; text-align:right; padding:2px 0;
+  }
+
+  .btn{
+    margin:26px 0 0; font-family:'IBM Plex Sans', sans-serif; font-weight:600; font-size:14.5px;
+    color:var(--paper); background:var(--cover); border:none; padding:13px 26px;
+    border-radius:2px; cursor:pointer; letter-spacing:0.01em;
+  }
+  .btn:hover{ background:var(--cover-deep); }
+
+  .result{ margin:30px 52px 0; padding-top:22px; border-top:2px solid var(--ink); display:none; }
+  .result.show{ display:block; animation: rise 0.45s ease; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+  .result-main{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px; }
+  .result-main .label{ font-family:'Lora', serif; font-size:15px; color:var(--ink-soft); }
+  .result-main .amount{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:34px; color:var(--stamp); position:relative;
+  }
+  .result-main .amount::after{
+    content:""; position:absolute; left:-8px; right:-8px; bottom:2px; top:2px;
+    border:2px solid var(--stamp); border-radius:3px; opacity:0.35; transform:rotate(-1.2deg); pointer-events:none;
+  }
+  .breakdown{ margin-top:20px; width:100%; border-collapse:collapse; }
+  .breakdown tr td{ padding:8px 0; font-size:13.5px; border-bottom:1px solid var(--paper-line); }
+  .breakdown tr td:first-child{ color:var(--ink-soft); }
+  .breakdown tr td:last-child{ font-family:'IBM Plex Mono', monospace; text-align:right; color:var(--ink); }
+  .breakdown tr.total td{ border-bottom:none; padding-top:12px; font-weight:600; }
+  .note{ margin:18px 52px 0; font-size:12.5px; color:var(--ink-soft); line-height:1.5; padding-bottom:8px; }
+
+  .explainer{ max-width:700px; width:100%; background:var(--paper); border-radius:3px; margin-top:24px; padding:34px 40px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.5); }
+  .explainer h2{ font-family:'Lora', serif; font-size:19px; margin:0 0 10px; }
+  .explainer p{ font-size:14.5px; line-height:1.7; color:var(--ink); margin:0 0 14px; }
+  .explainer ul{ padding-left:20px; margin:0 0 14px; }
+  .explainer li{ font-size:14.5px; line-height:1.7; color:var(--ink); margin-bottom:6px; }
+
+  footer{ max-width:700px; width:100%; color:#8F8975; font-size:12px; text-align:center; line-height:1.6; margin-top:28px; padding:0 16px; }
+  footer a{ color:var(--gold); }
+
+  @media (max-width:600px){
+    .page{ padding:28px 18px 26px; }
+    form{ padding-left:0; }
+    .row{ grid-template-columns:1fr; gap:8px; }
+    .result{ margin:26px 0 0; }
+    .note{ margin:16px 0 0; }
+    .explainer{ padding:26px 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="titleblock">
+    <a class="mark" href="index.html">← Hisaab Kitab</a>
+    <h1>Car loan calculator</h1>
+    <p>Work out your exact monthly installment for a car loan or dealer finance plan in Pakistan — enter the vehicle price, down payment, and terms below.</p>
+  </div>
+
+  <div class="book">
+    <section class="page">
+      <form id="form-car">
+        <div class="row">
+          <label>Vehicle price<span class="hint">The full on-road price of the car</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="c-price" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Down payment<span class="hint">Amount you'll pay upfront</span></label>
+          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="c-down" placeholder="0" min="0"></div>
+        </div>
+        <div class="row">
+          <label>Annual markup / interest rate<span class="hint">As quoted by the bank or dealer</span></label>
+          <div class="field"><input type="number" inputmode="decimal" id="c-rate" placeholder="0" min="0" step="0.1"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div>
+        </div>
+        <div class="row">
+          <label>Loan tenure<span class="hint">Common terms are 3, 5, or 7 years</span></label>
+          <div class="field">
+            <select id="c-years">
+              <option value="1">1 year</option>
+              <option value="2">2 years</option>
+              <option value="3" selected>3 years</option>
+              <option value="4">4 years</option>
+              <option value="5">5 years</option>
+              <option value="6">6 years</option>
+              <option value="7">7 years</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn" onclick="calcCar()">Calculate installment</button>
+      </form>
+      <div class="result" id="result-car">
+        <div class="result-main">
+          <span class="label">Monthly installment</span>
+          <span class="amount num" id="car-amount">Rs 0</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Vehicle price</td><td class="num" id="car-price">Rs 0</td></tr>
+          <tr><td>Down payment</td><td class="num" id="car-down">Rs 0</td></tr>
+          <tr><td>Amount financed</td><td class="num" id="car-financed">Rs 0</td></tr>
+          <tr><td>Total interest over tenure</td><td class="num" id="car-interest">Rs 0</td></tr>
+          <tr class="total"><td>Total amount payable</td><td class="num" id="car-total">Rs 0</td></tr>
+        </table>
+      </div>
+      <p class="note">Assumes a standard reducing-balance installment plan with equal monthly payments. Actual bank or dealer offers may add processing fees, insurance, or tracker device costs not shown here.</p>
+    </section>
+  </div>
+
+  <div class="explainer">
+    <h2>How car financing works in Pakistan</h2>
+    <p>Most banks and dealers offer car financing on a reducing-balance basis, meaning interest is calculated on the outstanding principal each month, not the original loan amount. Your monthly installment stays fixed for the full tenure, but the portion going toward interest gradually shrinks while the portion going toward principal grows.</p>
+    <p>A larger down payment reduces both your monthly installment and the total interest you'll pay over the loan's life, since you're financing a smaller amount from the start. Most banks require a minimum down payment, commonly 15-30% depending on the vehicle and lender.</p>
+    <ul>
+      <li>Compare markup rates across a few banks — even a 1-2% difference adds up significantly over a 5-year tenure.</li>
+      <li>Shorter tenures mean higher monthly installments but noticeably less total interest paid.</li>
+      <li>Factor in registration, token tax, and insurance separately — these aren't included in the loan amount by most lenders.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Estimates only — not professional financial advice. Verify final figures with your bank or dealer before signing.<br>
+    Hisaab Kitab · <a href="index.html">All calculators</a> · <a href="about.html">About</a>
+  </footer>
+
+<script>
+  function fmt(n){ n = Math.round(n); return 'Rs ' + n.toLocaleString('en-PK'); }
+
+  function calcCar(){
+    const price = +document.getElementById('c-price').value || 0;
+    const down = +document.getElementById('c-down').value || 0;
+    const annualRate = +document.getElementById('c-rate').value || 0;
+    const years = +document.getElementById('c-years').value || 3;
+    const months = years * 12;
+    const principal = Math.max(price - down, 0);
+    const r = (annualRate/100)/12;
+
+    let emi = 0;
+    if(months > 0 && principal > 0){
+      emi = r === 0 ? principal/months : (principal * r * Math.pow(1+r, months)) / (Math.pow(1+r, months) - 1);
+    }
+    const total = emi * months;
+    const interest = total - principal;
+
+    document.getElementById('car-amount').textContent = fmt(emi);
+    document.getElementById('car-price').textContent = fmt(price);
+    document.getElementById('car-down').textContent = fmt(down);
+    document.getElementById('car-financed').textContent = fmt(principal);
+    document.getElementById('car-interest').textContent = fmt(interest);
+    document.getElementById('car-total').textContent = fmt(total + down);
+    document.getElementById('result-car').classList.add('show');
+  }
+
+  ['c-price','c-down','c-rate','c-years'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', ()=>{
+      if(document.getElementById('c-price').value !== '') calcCar();
+    });
+  });
+</script>
+</body>
+</html>
