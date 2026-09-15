@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Hisaab Kitab</title>
-<!-- Google tag (gtag.js) -->
+<meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -13,42 +13,88 @@
   gtag('config', 'G-1SSYQEN5KC');
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
   :root{
-    --cover:#16332B; --paper:#FBF7ED; --paper-line:#DED2AC;
-    --ink:#221D14; --ink-soft:#5B5546; --gold:#A9791F;
+    --ink:#1A1400; --sun:#FFC93C; --coral:#FF5C7A; --mint:#3DDC97;
+    --paper:#FFF4D6; --cloud:#FFFFFF; --ink-soft:#6B6248;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--cover); color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif; min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px;
-  }
-  .book{
-    max-width:680px; width:100%; background:var(--paper); border-radius:3px;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55); padding:44px 40px;
-  }
-  a{ color:var(--gold); }
-  .mark{
-    display:inline-block; font-family:'Lora', serif; font-weight:600; font-size:14px;
-    letter-spacing:0.08em; color:var(--gold); text-decoration:none; margin-bottom:20px;
-  }
-  h1{ font-family:'Lora', serif; font-size:30px; margin:0 0 18px; }
-  p{ font-size:15px; line-height:1.7; color:var(--ink-soft); margin:0 0 16px; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; }
+  a{ color:var(--ink); }
+
+  .site-header{ display:flex; align-items:center; justify-content:space-between; max-width:1040px; margin:0 auto; padding:22px 20px 8px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .mark{ width:34px; height:34px; background:var(--ink); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--sun); font-family:'Sora',sans-serif; font-weight:800; font-size:16px; transform:rotate(-6deg); }
+  .logo .name{ font-family:'Sora',sans-serif; font-weight:800; font-size:18px; }
+  .site-nav{ display:flex; gap:8px; }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--ink); padding:8px 14px; border-radius:20px; border:2px solid transparent; }
+  .site-nav a:hover{ border-color:var(--ink); }
+
+  .wrap{ max-width:700px; margin:28px auto 0; padding:0 20px 40px; }
+  .card{ background:var(--cloud); border:3px solid var(--ink); border-radius:18px; box-shadow:7px 7px 0 var(--ink); padding:34px 32px; }
+  h1{ font-family:'Sora',sans-serif; font-weight:800; font-size:30px; margin:0 0 16px; }
+  h2{ font-family:'Sora',sans-serif; font-weight:700; font-size:17px; margin:26px 0 8px; }
+  p{ font-size:14.5px; line-height:1.7; color:var(--ink); margin:0 0 14px; }
+  ul{ padding-left:20px; margin:0 0 14px; }
+  li{ font-size:14.5px; line-height:1.7; margin-bottom:5px; }
   strong{ color:var(--ink); }
-  hr{ border:none; border-top:1px solid var(--paper-line); margin:26px 0; }
+  hr{ border:none; border-top:2px dashed #EEE0BC; margin:24px 0; }
+
+  .stat-row{ display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 6px; }
+  .stat-row span{
+    font-size:12.5px; font-weight:700; background:var(--paper); border:2px solid var(--ink);
+    padding:5px 12px; border-radius:20px;
+  }
+
+  footer{ max-width:700px; margin:20px auto 0; padding:0 20px 30px; color:var(--ink-soft); font-size:12px; text-align:center; line-height:1.6; }
+  footer a{ font-weight:600; text-decoration:underline; }
+
+  @media (max-width:600px){
+    .site-nav{ display:none; }
+    .card{ padding:26px 22px; }
+  }
 </style>
 </head>
 <body>
-  <div class="book">
-    <a class="mark" href="index.html">← Hisaab Kitab</a>
-    <h1>About this site</h1>
-    <p>Hisaab Kitab is a set of free calculators built for everyday financial questions in Pakistan — Zakat, income tax, loan installments, and take-home salary. The goal is simple: give quick, clear numbers without needing to do the math by hand or dig through FBR notifications.</p>
-    <p>The income tax calculator is kept up to date with the latest FBR salary slabs. The Zakat and EMI calculators use standard, widely accepted calculation methods.</p>
-    <hr>
-    <p><strong>A note on accuracy:</strong> Every calculator here gives an estimate based on the information you provide and publicly available rules. It isn't a substitute for advice from a qualified tax consultant, accountant, or religious scholar for Zakat matters. Always verify important financial or religious decisions with a professional.</p>
-    <hr>
-    <p><strong>Contact:</strong> Questions, corrections, or suggestions for new calculators are welcome. Reach out at <a href="mailto:hello@hisaabkitab.pk">hello@hisaabkitab.pk</a>.</p>
+  <header class="site-header">
+    <a class="logo" href="index.html"><span class="mark">₨</span><span class="name">Hisaab Kitab</span></a>
+    <nav class="site-nav"><a href="index.html">Calculators</a><a href="index.html#guides-section">Guides</a><a href="about.html">About</a></nav>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>About this site</h1>
+      <p>Hisaab Kitab is a growing set of free calculators built for everyday financial questions in Pakistan. The goal is simple: give quick, clear numbers without needing to do the math by hand or dig through FBR notifications.</p>
+
+      <div class="stat-row">
+        <span>11 calculators</span>
+        <span>Live currency rates</span>
+        <span>FY 2026-27 tax slabs</span>
+        <span>No sign-up needed</span>
+      </div>
+
+      <h2>What you'll find here</h2>
+      <ul>
+        <li><strong>Zakat</strong> — calculate what you owe on cash, gold, business assets, and investments</li>
+        <li><strong>Salary &amp; tax</strong> — income tax and take-home pay, using current FBR slabs</li>
+        <li><strong>Loans</strong> — EMI, car loan, and home loan installment calculators</li>
+        <li><strong>Business</strong> — profit margin, break-even, and discount calculators</li>
+        <li><strong>Everyday tools</strong> — a percentage calculator and a live currency converter</li>
+        <li><strong>Guides</strong> — plain-language explainers to go with the calculators, like how Zakat and FBR tax slabs actually work</li>
+      </ul>
+
+      <h2>A note on accuracy</h2>
+      <p>Every calculator here gives an estimate based on the information you provide and publicly available rules. It isn't a substitute for advice from a qualified tax consultant, accountant, or religious scholar for Zakat matters. Always verify important financial or religious decisions with a professional.</p>
+
+      <hr>
+
+      <h2>Contact</h2>
+      <p>Questions, corrections, or suggestions for new calculators are welcome. Reach out at <a href="mailto:hello@hisaabkitab.net">hello@hisaabkitab.net</a>.</p>
+    </div>
   </div>
+
+  <footer>
+    Hisaab Kitab · <a href="index.html">All calculators</a> · <a href="privacy.html">Privacy</a>
+  </footer>
 </body>
 </html>
