@@ -85,6 +85,19 @@
 
   /* ---------- Calculator toolbox ---------- */
   .toolbox{ max-width:1040px; margin:26px auto 0; padding:0 20px; }
+
+  .currency-picker{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    background:var(--cloud); border:2.5px solid var(--ink); border-radius:14px;
+    padding:12px 16px; margin-bottom:16px;
+  }
+  .currency-picker label{ font-size:12.5px; font-weight:700; font-family:'Sora',sans-serif; }
+  .currency-picker select{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--ink);
+    background:var(--paper); border:2px solid var(--ink); border-radius:8px; padding:6px 10px; cursor:pointer;
+  }
+  .currency-picker .currency-note{ font-size:11.5px; color:var(--ink-soft); flex-basis:100%; }
+  @media (min-width:640px){ .currency-picker .currency-note{ flex-basis:auto; margin-left:auto; text-align:right; max-width:280px; } }
   .pill-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:14px; flex-wrap:wrap; }
   .pill-tab{
     flex-shrink:0; font-family:'Sora',sans-serif; font-weight:700; font-size:13.5px;
@@ -219,6 +232,22 @@
   </section>
 
   <div class="toolbox">
+    <div class="currency-picker">
+      <label for="global-currency">Currency for loan &amp; business tools</label>
+      <select id="global-currency">
+        <option value="Rs" selected>Rs — Pakistani Rupee</option>
+        <option value="$">$ — US Dollar</option>
+        <option value="€">€ — Euro</option>
+        <option value="£">£ — British Pound</option>
+        <option value="₹">₹ — Indian Rupee</option>
+        <option value="AED">AED — UAE Dirham</option>
+        <option value="SAR">SAR — Saudi Riyal</option>
+        <option value="RM">RM — Malaysian Ringgit</option>
+        <option value="₦">₦ — Nigerian Naira</option>
+        <option value="R">R — South African Rand</option>
+      </select>
+      <span class="currency-note">Zakat, income tax &amp; take-home salary always use PKR — Pakistan-specific rules</span>
+    </div>
     <div class="pill-tabs" role="tablist">
       <button class="pill-tab" role="tab" aria-selected="true" data-tab="zakat">Zakat</button>
       <button class="pill-tab" role="tab" aria-selected="false" data-tab="tax">Income tax</button>
@@ -320,7 +349,7 @@
       <form id="form-emi">
         <div class="field-row">
           <label>Loan amount<span class="hint">Principal you're borrowing or financing</span></label>
-          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="e-principal" placeholder="0" min="0"></div>
+          <div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="e-principal" placeholder="0" min="0"></div>
         </div>
         <div class="field-row">
           <label>Annual interest / markup rate<span class="hint">As quoted by the bank or dealer</span></label>
@@ -353,11 +382,11 @@
       <form id="form-carloan">
         <div class="field-row">
           <label>Vehicle price<span class="hint">The full on-road price of the car</span></label>
-          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="c-price" placeholder="0" min="0"></div>
+          <div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="c-price" placeholder="0" min="0"></div>
         </div>
         <div class="field-row">
           <label>Down payment</label>
-          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="c-down" placeholder="0" min="0"></div>
+          <div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="c-down" placeholder="0" min="0"></div>
         </div>
         <div class="field-row">
           <label>Annual markup rate</label>
@@ -392,11 +421,11 @@
       <form id="form-homeloan">
         <div class="field-row">
           <label>Property price</label>
-          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="h-price" placeholder="0" min="0"></div>
+          <div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="h-price" placeholder="0" min="0"></div>
         </div>
         <div class="field-row">
           <label>Down payment</label>
-          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="h-down" placeholder="0" min="0"></div>
+          <div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="h-down" placeholder="0" min="0"></div>
         </div>
         <div class="field-row">
           <label>Annual markup rate</label>
@@ -485,7 +514,7 @@
       <h2>Discount calculator</h2>
       <p class="lede">Original price and discount percentage — see the final price and total savings.</p>
       <form>
-        <div class="field-row"><label>Original price</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="d-price" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Original price</label><div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="d-price" placeholder="0" min="0"></div></div>
         <div class="field-row"><label>Discount</label><div class="field-box"><input type="number" inputmode="decimal" id="d-pct" placeholder="0" min="0" max="100"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div></div>
       </form>
       <div class="result show">
@@ -502,9 +531,9 @@
       <h2>Break-even calculator</h2>
       <p class="lede">Fixed costs, price, and variable cost per unit — find your break-even point.</p>
       <form>
-        <div class="field-row"><label>Fixed costs<span class="hint">Rent, salaries, etc. per month</span></label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-fixed" placeholder="0" min="0"></div></div>
-        <div class="field-row"><label>Selling price per unit</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-price" placeholder="0" min="0"></div></div>
-        <div class="field-row"><label>Variable cost per unit</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-cost" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Fixed costs<span class="hint">Rent, salaries, etc. per month</span></label><div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="be-fixed" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Selling price per unit</label><div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="be-price" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Variable cost per unit</label><div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="be-cost" placeholder="0" min="0"></div></div>
       </form>
       <div class="result show">
         <div class="result-main"><span class="label">Break-even point</span><span class="amount num" id="be-units">0 units</span></div>
@@ -520,8 +549,8 @@
       <h2>Profit margin calculator</h2>
       <p class="lede">Cost and selling price — see profit, margin %, and markup %.</p>
       <form>
-        <div class="field-row"><label>Cost price</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-cost" placeholder="0" min="0"></div></div>
-        <div class="field-row"><label>Selling price</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-sell" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Cost price</label><div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="p-cost" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Selling price</label><div class="field-box"><span class="prefix currency-prefix">Rs</span><input type="number" inputmode="decimal" id="p-sell" placeholder="0" min="0"></div></div>
       </form>
       <div class="result show">
         <div class="result-main"><span class="label">Profit per unit</span><span class="amount num" id="p-profit">Rs 0</span></div>
@@ -659,6 +688,19 @@
     return 'Rs ' + n.toLocaleString('en-PK');
   }
 
+  // ---------- Currency selector for the universal tools (EMI, Car/Home loan, Discount, Break-even, Margin) ----------
+  let currencySymbol = 'Rs';
+  function fmtG(n){
+    n = Math.round(n);
+    return currencySymbol + ' ' + n.toLocaleString('en-US');
+  }
+  document.getElementById('global-currency').addEventListener('change', (e)=>{
+    currencySymbol = e.target.value;
+    document.querySelectorAll('.currency-prefix').forEach(el => el.textContent = currencySymbol);
+    // Recalculate any visible results with the new currency
+    calcEmi(); calcCarLoan(); calcHomeLoan(); calcDiscount(); calcBE(); calcMargin();
+  });
+
   function calcZakat(){
     const cash = +document.getElementById('z-cash').value || 0;
     const gold = +document.getElementById('z-gold').value || 0;
@@ -741,10 +783,10 @@
     const total = emi * months;
     const interest = total - p;
 
-    document.getElementById('emi-amount').textContent = fmt(emi);
-    document.getElementById('emi-principal').textContent = fmt(p);
-    document.getElementById('emi-interest').textContent = fmt(interest);
-    document.getElementById('emi-total').textContent = fmt(total);
+    document.getElementById('emi-amount').textContent = fmtG(emi);
+    document.getElementById('emi-principal').textContent = fmtG(p);
+    document.getElementById('emi-interest').textContent = fmtG(interest);
+    document.getElementById('emi-total').textContent = fmtG(total);
     document.getElementById('result-emi').classList.add('show');
   }
 
@@ -832,10 +874,10 @@
       emi = r === 0 ? principal/months : (principal * r * Math.pow(1+r, months)) / (Math.pow(1+r, months) - 1);
     }
     const total = emi * months;
-    document.getElementById('carloan-amount').textContent = fmt(emi);
-    document.getElementById('carloan-financed').textContent = fmt(principal);
-    document.getElementById('carloan-interest').textContent = fmt(total - principal);
-    document.getElementById('carloan-total').textContent = fmt(total + down);
+    document.getElementById('carloan-amount').textContent = fmtG(emi);
+    document.getElementById('carloan-financed').textContent = fmtG(principal);
+    document.getElementById('carloan-interest').textContent = fmtG(total - principal);
+    document.getElementById('carloan-total').textContent = fmtG(total + down);
     document.getElementById('result-carloan').classList.add('show');
   }
 
@@ -853,10 +895,10 @@
       emi = r === 0 ? principal/months : (principal * r * Math.pow(1+r, months)) / (Math.pow(1+r, months) - 1);
     }
     const total = emi * months;
-    document.getElementById('homeloan-amount').textContent = fmt(emi);
-    document.getElementById('homeloan-financed').textContent = fmt(principal);
-    document.getElementById('homeloan-interest').textContent = fmt(total - principal);
-    document.getElementById('homeloan-total').textContent = fmt(total + down);
+    document.getElementById('homeloan-amount').textContent = fmtG(emi);
+    document.getElementById('homeloan-financed').textContent = fmtG(principal);
+    document.getElementById('homeloan-interest').textContent = fmtG(total - principal);
+    document.getElementById('homeloan-total').textContent = fmtG(total + down);
     document.getElementById('result-homeloan').classList.add('show');
   }
 
@@ -895,9 +937,9 @@
     const price = +document.getElementById('d-price').value || 0;
     const pct = +document.getElementById('d-pct').value || 0;
     const save = price * (pct/100);
-    document.getElementById('d-final').textContent = fmt(price - save);
-    document.getElementById('d-orig').textContent = fmt(price);
-    document.getElementById('d-save').textContent = fmt(save);
+    document.getElementById('d-final').textContent = fmtG(price - save);
+    document.getElementById('d-orig').textContent = fmtG(price);
+    document.getElementById('d-save').textContent = fmtG(save);
   }
 
   // ---------- Break-even ----------
@@ -907,9 +949,9 @@
     const cost = +document.getElementById('be-cost').value || 0;
     const margin = price - cost;
     const units = margin > 0 ? Math.ceil(fixed / margin) : 0;
-    document.getElementById('be-units').textContent = units.toLocaleString('en-PK') + ' units';
-    document.getElementById('be-margin').textContent = fmt(margin);
-    document.getElementById('be-revenue').textContent = fmt(units * price);
+    document.getElementById('be-units').textContent = units.toLocaleString('en-US') + ' units';
+    document.getElementById('be-margin').textContent = fmtG(margin);
+    document.getElementById('be-revenue').textContent = fmtG(units * price);
   }
 
   // ---------- Profit margin ----------
@@ -919,7 +961,7 @@
     const profit = sell - cost;
     const margin = sell > 0 ? (profit/sell)*100 : 0;
     const markup = cost > 0 ? (profit/cost)*100 : 0;
-    document.getElementById('p-profit').textContent = fmt(profit);
+    document.getElementById('p-profit').textContent = fmtG(profit);
     document.getElementById('p-margin').textContent = margin.toFixed(1) + '%';
     document.getElementById('p-markup').textContent = markup.toFixed(1) + '%';
   }
