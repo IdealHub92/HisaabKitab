@@ -85,13 +85,20 @@
 
   /* ---------- Calculator toolbox ---------- */
   .toolbox{ max-width:1040px; margin:26px auto 0; padding:0 20px; }
-  .pill-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:14px; }
+  .pill-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:14px; flex-wrap:wrap; }
   .pill-tab{
     flex-shrink:0; font-family:'Sora',sans-serif; font-weight:700; font-size:13.5px;
     background:var(--cloud); border:2.5px solid var(--ink); padding:9px 16px;
     border-radius:20px; cursor:pointer; color:var(--ink);
   }
   .pill-tab[aria-selected="true"]{ background:var(--ink); color:var(--sun); }
+
+  .mini-tab{
+    font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:12.5px;
+    background:var(--paper); border:2px solid var(--ink); padding:7px 12px;
+    border-radius:16px; cursor:pointer; color:var(--ink); margin-right:6px; margin-bottom:6px;
+  }
+  .mini-tab[aria-selected="true"]{ background:var(--coral); color:var(--cloud); }
 
   .card{
     background:var(--cloud); border:3px solid var(--ink); border-radius:18px;
@@ -200,7 +207,6 @@
       <h1>Your money, sorted.</h1>
       <p>Five free calculators built for Pakistan — Zakat, income tax, loan installments, salary, and currency. No sign-up, no clutter, just fast answers.</p>
       <div class="hero-badges">
-        <span>5 calculators</span>
         <span>FY 2026-27 tax slabs</span>
         <span>Free forever</span>
       </div>
@@ -217,7 +223,13 @@
       <button class="pill-tab" role="tab" aria-selected="true" data-tab="zakat">Zakat</button>
       <button class="pill-tab" role="tab" aria-selected="false" data-tab="tax">Income tax</button>
       <button class="pill-tab" role="tab" aria-selected="false" data-tab="emi">EMI</button>
+      <button class="pill-tab" role="tab" aria-selected="false" data-tab="carloan">Car loan</button>
+      <button class="pill-tab" role="tab" aria-selected="false" data-tab="homeloan">Home loan</button>
       <button class="pill-tab" role="tab" aria-selected="false" data-tab="salary">Salary</button>
+      <button class="pill-tab" role="tab" aria-selected="false" data-tab="percentage">Percentage</button>
+      <button class="pill-tab" role="tab" aria-selected="false" data-tab="discount">Discount</button>
+      <button class="pill-tab" role="tab" aria-selected="false" data-tab="breakeven">Break-even</button>
+      <button class="pill-tab" role="tab" aria-selected="false" data-tab="margin">Profit margin</button>
       <button class="pill-tab" role="tab" aria-selected="false" data-tab="currency">Currency</button>
     </div>
 
@@ -334,6 +346,83 @@
       <p class="note">Assumes a standard reducing-balance installment plan with equal monthly payments. Actual bank offers may include processing fees or insurance not shown here.</p>
     </div>
 
+    <!-- CAR LOAN -->
+    <div class="card" id="page-carloan" style="display:none">
+      <h2>Car loan calculator</h2>
+      <p class="lede">Vehicle price, down payment, and tenure — see your exact monthly installment.</p>
+      <form id="form-carloan">
+        <div class="field-row">
+          <label>Vehicle price<span class="hint">The full on-road price of the car</span></label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="c-price" placeholder="0" min="0"></div>
+        </div>
+        <div class="field-row">
+          <label>Down payment</label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="c-down" placeholder="0" min="0"></div>
+        </div>
+        <div class="field-row">
+          <label>Annual markup rate</label>
+          <div class="field-box"><input type="number" inputmode="decimal" id="c-rate" placeholder="0" min="0" step="0.1"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div>
+        </div>
+        <div class="field-row">
+          <label>Loan tenure</label>
+          <div class="field-box">
+            <select id="c-years">
+              <option value="1">1 year</option><option value="2">2 years</option>
+              <option value="3" selected>3 years</option><option value="4">4 years</option>
+              <option value="5">5 years</option><option value="6">6 years</option><option value="7">7 years</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn" onclick="calcCarLoan()">Calculate installment</button>
+      </form>
+      <div class="result" id="result-carloan">
+        <div class="result-main"><span class="label">Monthly installment</span><span class="amount num" id="carloan-amount">Rs 0</span></div>
+        <table class="breakdown">
+          <tr><td>Amount financed</td><td class="num" id="carloan-financed">Rs 0</td></tr>
+          <tr><td>Total interest</td><td class="num" id="carloan-interest">Rs 0</td></tr>
+          <tr class="total"><td>Total payable</td><td class="num" id="carloan-total">Rs 0</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- HOME LOAN -->
+    <div class="card" id="page-homeloan" style="display:none">
+      <h2>Home loan calculator</h2>
+      <p class="lede">Property price, down payment, and tenure — see your exact monthly installment.</p>
+      <form id="form-homeloan">
+        <div class="field-row">
+          <label>Property price</label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="h-price" placeholder="0" min="0"></div>
+        </div>
+        <div class="field-row">
+          <label>Down payment</label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="h-down" placeholder="0" min="0"></div>
+        </div>
+        <div class="field-row">
+          <label>Annual markup rate</label>
+          <div class="field-box"><input type="number" inputmode="decimal" id="h-rate" placeholder="0" min="0" step="0.1"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div>
+        </div>
+        <div class="field-row">
+          <label>Loan tenure</label>
+          <div class="field-box">
+            <select id="h-years">
+              <option value="5">5 years</option><option value="10">10 years</option>
+              <option value="15">15 years</option><option value="20" selected>20 years</option><option value="25">25 years</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn" onclick="calcHomeLoan()">Calculate installment</button>
+      </form>
+      <div class="result" id="result-homeloan">
+        <div class="result-main"><span class="label">Monthly installment</span><span class="amount num" id="homeloan-amount">Rs 0</span></div>
+        <table class="breakdown">
+          <tr><td>Amount financed</td><td class="num" id="homeloan-financed">Rs 0</td></tr>
+          <tr><td>Total interest</td><td class="num" id="homeloan-interest">Rs 0</td></tr>
+          <tr class="total"><td>Total payable</td><td class="num" id="homeloan-total">Rs 0</td></tr>
+        </table>
+      </div>
+    </div>
+
     <!-- SALARY -->
     <div class="card" id="page-salary" style="display:none">
       <h2>Take-home salary</h2>
@@ -357,6 +446,90 @@
         </table>
       </div>
       <p class="note">Shows income tax only. Your actual in-hand pay may differ slightly after EOBI, provident fund, or other employer deductions.</p>
+    </div>
+
+    <!-- PERCENTAGE -->
+    <div class="card" id="page-percentage" style="display:none">
+      <h2>Percentage calculator</h2>
+      <p class="lede">Three common percentage problems — pick the one you need.</p>
+      <div class="pill-tabs" style="margin-bottom:6px;">
+        <button class="mini-tab" data-mode="find" aria-selected="true">What % is X of Y</button>
+        <button class="mini-tab" data-mode="change" aria-selected="false">% increase/decrease</button>
+        <button class="mini-tab" data-mode="apply" aria-selected="false">Add/subtract %</button>
+      </div>
+      <div id="mode-find">
+        <form>
+          <div class="field-row"><label>This number</label><div class="field-box"><input type="number" inputmode="decimal" id="f-x" placeholder="0"></div></div>
+          <div class="field-row"><label>Is what percent of this number</label><div class="field-box"><input type="number" inputmode="decimal" id="f-y" placeholder="0"></div></div>
+        </form>
+        <div class="result show"><div class="result-main"><span class="label">Result</span><span class="amount num" id="f-result">0%</span></div></div>
+      </div>
+      <div id="mode-change" style="display:none">
+        <form>
+          <div class="field-row"><label>Original value</label><div class="field-box"><input type="number" inputmode="decimal" id="pc-from" placeholder="0"></div></div>
+          <div class="field-row"><label>New value</label><div class="field-box"><input type="number" inputmode="decimal" id="pc-to" placeholder="0"></div></div>
+        </form>
+        <div class="result show"><div class="result-main"><span class="label" id="pc-label">Change</span><span class="amount num" id="pc-result">0%</span></div></div>
+      </div>
+      <div id="mode-apply" style="display:none">
+        <form>
+          <div class="field-row"><label>Starting number</label><div class="field-box"><input type="number" inputmode="decimal" id="a-num" placeholder="0"></div></div>
+          <div class="field-row"><label>Percent to add/subtract<span class="hint">Use a negative number to subtract</span></label><div class="field-box"><input type="number" inputmode="decimal" id="a-pct" placeholder="0"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div></div>
+        </form>
+        <div class="result show"><div class="result-main"><span class="label">Result</span><span class="amount num" id="a-result">0</span></div></div>
+      </div>
+    </div>
+
+    <!-- DISCOUNT -->
+    <div class="card" id="page-discount" style="display:none">
+      <h2>Discount calculator</h2>
+      <p class="lede">Original price and discount percentage — see the final price and total savings.</p>
+      <form>
+        <div class="field-row"><label>Original price</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="d-price" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Discount</label><div class="field-box"><input type="number" inputmode="decimal" id="d-pct" placeholder="0" min="0" max="100"><span class="prefix" style="margin-left:6px;margin-right:0">%</span></div></div>
+      </form>
+      <div class="result show">
+        <div class="result-main"><span class="label">Final price</span><span class="amount num" id="d-final">Rs 0</span></div>
+        <table class="breakdown">
+          <tr><td>Original price</td><td class="num" id="d-orig">Rs 0</td></tr>
+          <tr><td>You save</td><td class="num" id="d-save">Rs 0</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- BREAK-EVEN -->
+    <div class="card" id="page-breakeven" style="display:none">
+      <h2>Break-even calculator</h2>
+      <p class="lede">Fixed costs, price, and variable cost per unit — find your break-even point.</p>
+      <form>
+        <div class="field-row"><label>Fixed costs<span class="hint">Rent, salaries, etc. per month</span></label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-fixed" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Selling price per unit</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-price" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Variable cost per unit</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-cost" placeholder="0" min="0"></div></div>
+      </form>
+      <div class="result show">
+        <div class="result-main"><span class="label">Break-even point</span><span class="amount num" id="be-units">0 units</span></div>
+        <table class="breakdown">
+          <tr><td>Contribution margin per unit</td><td class="num" id="be-margin">Rs 0</td></tr>
+          <tr><td>Break-even revenue</td><td class="num" id="be-revenue">Rs 0</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- PROFIT MARGIN -->
+    <div class="card" id="page-margin" style="display:none">
+      <h2>Profit margin calculator</h2>
+      <p class="lede">Cost and selling price — see profit, margin %, and markup %.</p>
+      <form>
+        <div class="field-row"><label>Cost price</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-cost" placeholder="0" min="0"></div></div>
+        <div class="field-row"><label>Selling price</label><div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-sell" placeholder="0" min="0"></div></div>
+      </form>
+      <div class="result show">
+        <div class="result-main"><span class="label">Profit per unit</span><span class="amount num" id="p-profit">Rs 0</span></div>
+        <table class="breakdown">
+          <tr><td>Profit margin</td><td class="num" id="p-margin">0%</td></tr>
+          <tr><td>Markup</td><td class="num" id="p-markup">0%</td></tr>
+        </table>
+      </div>
     </div>
 
     <!-- CURRENCY -->
@@ -466,7 +639,11 @@
 
 <script>
   const tabs = document.querySelectorAll('.pill-tab');
-  const pages = { zakat:'page-zakat', tax:'page-tax', emi:'page-emi', salary:'page-salary', currency:'page-currency' };
+  const pages = {
+    zakat:'page-zakat', tax:'page-tax', emi:'page-emi', carloan:'page-carloan', homeloan:'page-homeloan',
+    salary:'page-salary', percentage:'page-percentage', discount:'page-discount', breakeven:'page-breakeven',
+    margin:'page-margin', currency:'page-currency'
+  };
   tabs.forEach(tab=>{
     tab.addEventListener('click', ()=>{
       tabs.forEach(t=>t.setAttribute('aria-selected','false'));
@@ -641,11 +818,125 @@
     document.getElementById(id).addEventListener('input', calcCurrency);
   });
 
+  // ---------- Car loan ----------
+  function calcCarLoan(){
+    const price = +document.getElementById('c-price').value || 0;
+    const down = +document.getElementById('c-down').value || 0;
+    const annualRate = +document.getElementById('c-rate').value || 0;
+    const years = +document.getElementById('c-years').value || 3;
+    const months = years * 12;
+    const principal = Math.max(price - down, 0);
+    const r = (annualRate/100)/12;
+    let emi = 0;
+    if(months > 0 && principal > 0){
+      emi = r === 0 ? principal/months : (principal * r * Math.pow(1+r, months)) / (Math.pow(1+r, months) - 1);
+    }
+    const total = emi * months;
+    document.getElementById('carloan-amount').textContent = fmt(emi);
+    document.getElementById('carloan-financed').textContent = fmt(principal);
+    document.getElementById('carloan-interest').textContent = fmt(total - principal);
+    document.getElementById('carloan-total').textContent = fmt(total + down);
+    document.getElementById('result-carloan').classList.add('show');
+  }
+
+  // ---------- Home loan ----------
+  function calcHomeLoan(){
+    const price = +document.getElementById('h-price').value || 0;
+    const down = +document.getElementById('h-down').value || 0;
+    const annualRate = +document.getElementById('h-rate').value || 0;
+    const years = +document.getElementById('h-years').value || 20;
+    const months = years * 12;
+    const principal = Math.max(price - down, 0);
+    const r = (annualRate/100)/12;
+    let emi = 0;
+    if(months > 0 && principal > 0){
+      emi = r === 0 ? principal/months : (principal * r * Math.pow(1+r, months)) / (Math.pow(1+r, months) - 1);
+    }
+    const total = emi * months;
+    document.getElementById('homeloan-amount').textContent = fmt(emi);
+    document.getElementById('homeloan-financed').textContent = fmt(principal);
+    document.getElementById('homeloan-interest').textContent = fmt(total - principal);
+    document.getElementById('homeloan-total').textContent = fmt(total + down);
+    document.getElementById('result-homeloan').classList.add('show');
+  }
+
+  // ---------- Percentage (3 modes) ----------
+  const miniTabs = document.querySelectorAll('.mini-tab');
+  const modes = { find:'mode-find', change:'mode-change', apply:'mode-apply' };
+  miniTabs.forEach(mt=>{
+    mt.addEventListener('click', ()=>{
+      miniTabs.forEach(t=>t.setAttribute('aria-selected','false'));
+      mt.setAttribute('aria-selected','true');
+      Object.values(modes).forEach(id=>document.getElementById(id).style.display='none');
+      document.getElementById(modes[mt.dataset.mode]).style.display='block';
+    });
+  });
+  function calcPctFind(){
+    const x = +document.getElementById('f-x').value || 0;
+    const y = +document.getElementById('f-y').value || 0;
+    const result = y !== 0 ? (x/y*100) : 0;
+    document.getElementById('f-result').textContent = result.toLocaleString('en-PK',{maximumFractionDigits:2}) + '%';
+  }
+  function calcPctChange(){
+    const from = +document.getElementById('pc-from').value || 0;
+    const to = +document.getElementById('pc-to').value || 0;
+    const change = from !== 0 ? ((to-from)/from*100) : 0;
+    document.getElementById('pc-label').textContent = change >= 0 ? 'Percentage increase' : 'Percentage decrease';
+    document.getElementById('pc-result').textContent = Math.abs(change).toLocaleString('en-PK',{maximumFractionDigits:2}) + '%';
+  }
+  function calcPctApply(){
+    const num = +document.getElementById('a-num').value || 0;
+    const pct = +document.getElementById('a-pct').value || 0;
+    document.getElementById('a-result').textContent = (num + (num * pct/100)).toLocaleString('en-PK',{maximumFractionDigits:2});
+  }
+
+  // ---------- Discount ----------
+  function calcDiscount(){
+    const price = +document.getElementById('d-price').value || 0;
+    const pct = +document.getElementById('d-pct').value || 0;
+    const save = price * (pct/100);
+    document.getElementById('d-final').textContent = fmt(price - save);
+    document.getElementById('d-orig').textContent = fmt(price);
+    document.getElementById('d-save').textContent = fmt(save);
+  }
+
+  // ---------- Break-even ----------
+  function calcBE(){
+    const fixed = +document.getElementById('be-fixed').value || 0;
+    const price = +document.getElementById('be-price').value || 0;
+    const cost = +document.getElementById('be-cost').value || 0;
+    const margin = price - cost;
+    const units = margin > 0 ? Math.ceil(fixed / margin) : 0;
+    document.getElementById('be-units').textContent = units.toLocaleString('en-PK') + ' units';
+    document.getElementById('be-margin').textContent = fmt(margin);
+    document.getElementById('be-revenue').textContent = fmt(units * price);
+  }
+
+  // ---------- Profit margin ----------
+  function calcMargin(){
+    const cost = +document.getElementById('p-cost').value || 0;
+    const sell = +document.getElementById('p-sell').value || 0;
+    const profit = sell - cost;
+    const margin = sell > 0 ? (profit/sell)*100 : 0;
+    const markup = cost > 0 ? (profit/cost)*100 : 0;
+    document.getElementById('p-profit').textContent = fmt(profit);
+    document.getElementById('p-margin').textContent = margin.toFixed(1) + '%';
+    document.getElementById('p-markup').textContent = markup.toFixed(1) + '%';
+  }
+
   const autoCalcFields = {
     'z-cash':calcZakat, 'z-gold':calcZakat, 'z-stock':calcZakat, 'z-inv':calcZakat, 'z-debt':calcZakat, 'z-nisab':calcZakat,
     't-period':calcTax, 't-salary':calcTax,
     'e-principal':calcEmi, 'e-rate':calcEmi, 'e-months':calcEmi,
-    's-salary':calcSalary
+    'c-price':calcCarLoan, 'c-down':calcCarLoan, 'c-rate':calcCarLoan, 'c-years':calcCarLoan,
+    'h-price':calcHomeLoan, 'h-down':calcHomeLoan, 'h-rate':calcHomeLoan, 'h-years':calcHomeLoan,
+    's-salary':calcSalary,
+    'f-x':calcPctFind, 'f-y':calcPctFind,
+    'pc-from':calcPctChange, 'pc-to':calcPctChange,
+    'a-num':calcPctApply, 'a-pct':calcPctApply,
+    'd-price':calcDiscount, 'd-pct':calcDiscount,
+    'be-fixed':calcBE, 'be-price':calcBE, 'be-cost':calcBE,
+    'p-cost':calcMargin, 'p-sell':calcMargin
   };
   Object.keys(autoCalcFields).forEach(id=>{
     const el = document.getElementById(id);
