@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break-Even Calculator — Units &amp; Revenue | Hisaab Kitab</title>
+<meta name="description" content="Calculate your break-even point in units and revenue from fixed costs, price per unit, and variable cost per unit. Free calculator for small businesses.">
+<meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1SSYQEN5KC');
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+  :root{
+    --ink:#1A1400; --sun:#FFC93C; --coral:#FF5C7A; --mint:#3DDC97;
+    --paper:#FFF4D6; --cloud:#FFFFFF; --ink-soft:#6B6248;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; }
+  .num{ font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; }
+  a{ color:inherit; }
+
+  .site-header{ display:flex; align-items:center; justify-content:space-between; max-width:1040px; margin:0 auto; padding:22px 20px 8px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .mark{ width:34px; height:34px; background:var(--ink); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--sun); font-family:'Sora',sans-serif; font-weight:800; font-size:16px; transform:rotate(-6deg); }
+  .logo .name{ font-family:'Sora',sans-serif; font-weight:800; font-size:18px; }
+  .site-nav{ display:flex; gap:8px; }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--ink); padding:8px 14px; border-radius:20px; border:2px solid transparent; }
+  .site-nav a:hover{ border-color:var(--ink); }
+
+  .pagehead{ max-width:700px; margin:20px auto 0; padding:0 20px; }
+  .pagehead h1{ font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(26px,4vw,34px); margin:0 0 8px; }
+  .pagehead p{ font-size:14.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
+
+  .toolbox{ max-width:700px; margin:22px auto 0; padding:0 20px; }
+  .card{ background:var(--cloud); border:3px solid var(--ink); border-radius:18px; box-shadow:7px 7px 0 var(--ink); padding:28px 26px 24px; }
+  .field-row{ display:grid; grid-template-columns:1fr 170px; align-items:baseline; gap:16px; padding:12px 0; border-bottom:2px dashed #EEE0BC; }
+  .field-row label{ font-size:14px; font-weight:600; }
+  .field-row .hint{ display:block; font-size:12px; font-weight:400; color:var(--ink-soft); margin-top:2px; }
+  .field-box{ display:flex; align-items:center; background:var(--paper); border:2px solid var(--ink); border-radius:10px; padding:8px 12px; }
+  .field-box .prefix{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-soft); margin-right:6px; }
+  .field-row input{ border:none; background:transparent; outline:none; font-family:'IBM Plex Mono',monospace; font-size:15px; color:var(--ink); width:100%; text-align:right; font-weight:600; }
+
+  .result{ margin-top:24px; padding-top:20px; border-top:3px solid var(--ink); }
+  .result-main{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px; }
+  .result-main .label{ font-family:'Sora',sans-serif; font-size:14px; font-weight:600; color:var(--ink-soft); }
+  .result-main .amount{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:32px; color:var(--coral); }
+  .breakdown{ margin-top:18px; width:100%; border-collapse:collapse; }
+  .breakdown tr td{ padding:8px 0; font-size:13px; border-bottom:1px solid #F0E4C2; }
+  .breakdown tr td:first-child{ color:var(--ink-soft); font-weight:500; }
+  .breakdown tr td:last-child{ font-family:'IBM Plex Mono',monospace; text-align:right; font-weight:600; }
+  .note{ margin-top:14px; font-size:12px; color:var(--ink-soft); line-height:1.5; }
+
+  .explainer{ max-width:700px; margin:22px auto 0; padding:0 20px; }
+  .explainer .inner{ background:var(--cloud); border:2.5px solid var(--ink); border-radius:14px; padding:24px 26px; }
+  .explainer h2{ font-family:'Sora',sans-serif; font-size:18px; font-weight:800; margin:0 0 10px; }
+  .explainer p{ font-size:14px; line-height:1.65; margin:0 0 12px; color:var(--ink); }
+  .explainer ul{ padding-left:20px; margin:0; }
+  .explainer li{ font-size:14px; line-height:1.65; margin-bottom:6px; }
+
+  footer{ max-width:700px; margin:34px auto 0; padding:20px; color:var(--ink-soft); font-size:12px; text-align:center; line-height:1.6; }
+  footer a{ color:var(--ink); font-weight:600; text-decoration:underline; }
+
+  @media (max-width:600px){
+    .site-nav{ display:none; }
+    .field-row{ grid-template-columns:1fr; gap:8px; }
+    .card{ padding:20px 18px; }
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html"><span class="mark">₨</span><span class="name">Hisaab Kitab</span></a>
+    <nav class="site-nav"><a href="index.html">Calculators</a><a href="index.html#guides-section">Guides</a><a href="about.html">About</a></nav>
+  </header>
+
+  <div class="pagehead">
+    <h1>Break-even calculator</h1>
+    <p>Find out how many units you need to sell — and how much revenue that means — before your business starts turning a profit.</p>
+  </div>
+
+  <div class="toolbox">
+    <div class="card">
+      <form id="form-be">
+        <div class="field-row">
+          <label>Fixed costs<span class="hint">Rent, salaries, and other costs that don't change with sales volume, per month</span></label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-fixed" placeholder="0" min="0"></div>
+        </div>
+        <div class="field-row">
+          <label>Selling price per unit</label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-price" placeholder="0" min="0"></div>
+        </div>
+        <div class="field-row">
+          <label>Variable cost per unit<span class="hint">What it costs you to produce or acquire one unit</span></label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="be-cost" placeholder="0" min="0"></div>
+        </div>
+      </form>
+      <div class="result">
+        <div class="result-main">
+          <span class="label">Break-even point</span>
+          <span class="amount num" id="be-units">0 units</span>
+        </div>
+        <table class="breakdown">
+          <tr><td>Contribution margin per unit</td><td class="num" id="be-margin">Rs 0</td></tr>
+          <tr><td>Break-even revenue</td><td class="num" id="be-revenue">Rs 0</td></tr>
+        </table>
+      </div>
+      <p class="note">This is the point where total revenue equals total costs — beyond this, each additional unit sold is profit.</p>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <div class="inner">
+      <h2>Why break-even matters</h2>
+      <p>Your break-even point tells you the minimum you need to sell before a business idea, product launch, or new pricing structure actually makes money. Below this number, you're operating at a loss regardless of how good the product is.</p>
+      <ul>
+        <li>Lowering fixed costs or variable costs per unit brings your break-even point down, making the business viable faster.</li>
+        <li>Raising your price does the same, but only if demand holds at the higher price.</li>
+        <li>Use this before committing to a new product line, not after — it's a planning tool, not just a retrospective one.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    Hisaab Kitab · <a href="index.html">All calculators</a> · <a href="about.html">About</a>
+  </footer>
+
+<script>
+  function fmt(n){ return 'Rs ' + Math.round(n).toLocaleString('en-PK'); }
+  function calcBE(){
+    const fixed = +document.getElementById('be-fixed').value || 0;
+    const price = +document.getElementById('be-price').value || 0;
+    const cost = +document.getElementById('be-cost').value || 0;
+    const margin = price - cost;
+    const units = margin > 0 ? Math.ceil(fixed / margin) : 0;
+    const revenue = units * price;
+
+    document.getElementById('be-units').textContent = units.toLocaleString('en-PK') + ' units';
+    document.getElementById('be-margin').textContent = fmt(margin);
+    document.getElementById('be-revenue').textContent = fmt(revenue);
+  }
+  ['be-fixed','be-price','be-cost'].forEach(id=>document.getElementById(id).addEventListener('input',calcBE));
+</script>
+</body>
+</html>
