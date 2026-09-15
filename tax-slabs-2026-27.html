@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FBR Income Tax Slabs 2026-27 Explained (Salaried Individuals) — Hisaab Kitab</title>
 <meta name="description" content="A plain-language breakdown of Pakistan's FBR income tax slabs for salaried individuals, FY 2026-27, effective 1 July 2026 — with worked examples.">
-<!-- Google tag (gtag.js) -->
+<meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,129 +14,128 @@
   gtag('config', 'G-1SSYQEN5KC');
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
   :root{
-    --cover:#16332B; --paper:#FBF7ED; --paper-line:#DED2AC;
-    --ink:#221D14; --ink-soft:#5B5546; --gold:#A9791F; --stamp:#A63D2F;
+    --ink:#1A1400; --sun:#FFC93C; --coral:#FF5C7A; --mint:#3DDC97;
+    --paper:#FFF4D6; --cloud:#FFFFFF; --ink-soft:#6B6248;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--cover); color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif; min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px;
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; }
+  .num{ font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; }
+  a{ color:var(--ink); }
+
+  .site-header{ display:flex; align-items:center; justify-content:space-between; max-width:1040px; margin:0 auto; padding:22px 20px 8px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .mark{ width:34px; height:34px; background:var(--ink); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--sun); font-family:'Sora',sans-serif; font-weight:800; font-size:16px; transform:rotate(-6deg); }
+  .logo .name{ font-family:'Sora',sans-serif; font-weight:800; font-size:18px; }
+  .site-nav{ display:flex; gap:8px; }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--ink); padding:8px 14px; border-radius:20px; border:2px solid transparent; }
+  .site-nav a:hover{ border-color:var(--ink); }
+
+  .wrap{ max-width:700px; margin:26px auto 0; padding:0 20px 40px; }
+  .eyebrow{
+    display:inline-block; font-size:12px; font-weight:700; background:var(--ink); color:var(--sun);
+    padding:4px 12px; border-radius:20px; margin-bottom:14px;
   }
-  .num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
-  .book{
-    max-width:700px; width:100%; background:var(--paper); border-radius:3px;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55); padding:46px 44px;
-  }
-  a{ color:var(--gold); }
-  .mark{
-    display:inline-block; font-family:'Lora', serif; font-weight:600; font-size:14px;
-    letter-spacing:0.08em; color:var(--gold); text-decoration:none; margin-bottom:22px;
-  }
-  .eyebrow{ font-size:13px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-bottom:10px; }
-  h1{ font-family:'Lora', serif; font-size:32px; line-height:1.2; margin:0 0 14px; }
-  .lede{ font-size:16px; line-height:1.6; color:var(--ink-soft); margin:0 0 30px; }
-  h2{ font-family:'Lora', serif; font-size:21px; margin:36px 0 12px; }
-  p{ font-size:15px; line-height:1.75; color:var(--ink); margin:0 0 16px; }
+  .card{ background:var(--cloud); border:3px solid var(--ink); border-radius:18px; box-shadow:7px 7px 0 var(--ink); padding:36px 34px; }
+  h1{ font-family:'Sora',sans-serif; font-weight:800; font-size:28px; line-height:1.2; margin:0 0 14px; }
+  .lede{ font-size:15.5px; line-height:1.6; color:var(--ink-soft); margin:0 0 26px; }
+  h2{ font-family:'Sora',sans-serif; font-size:19px; font-weight:800; margin:32px 0 12px; }
+  p{ font-size:14.5px; line-height:1.75; color:var(--ink); margin:0 0 16px; }
   ul, ol{ padding-left:22px; margin:0 0 16px; }
-  li{ font-size:15px; line-height:1.7; color:var(--ink); margin-bottom:6px; }
-  hr{ border:none; border-top:1px solid var(--paper-line); margin:32px 0; }
+  li{ font-size:14.5px; line-height:1.7; color:var(--ink); margin-bottom:6px; }
+  hr{ border:none; border-top:2px dashed #EEE0BC; margin:28px 0; }
 
-  table{ width:100%; border-collapse:collapse; margin:18px 0 26px; }
-  th{
-    text-align:left; font-family:'IBM Plex Sans',sans-serif; font-size:12.5px;
-    text-transform:none; color:var(--ink-soft); font-weight:600;
-    border-bottom:2px solid var(--ink); padding:8px 10px;
-  }
-  td{
-    font-family:'IBM Plex Mono', monospace; font-size:13.5px;
-    padding:9px 10px; border-bottom:1px solid var(--paper-line);
-  }
-  td:first-child, th:first-child{ font-family:'IBM Plex Sans',sans-serif; font-size:14px; }
+  table{ width:100%; border-collapse:collapse; margin:16px 0 24px; }
+  th{ text-align:left; font-size:12px; font-weight:700; color:var(--ink-soft); border-bottom:2px solid var(--ink); padding:8px 10px; }
+  td{ font-family:'IBM Plex Mono',monospace; font-size:13px; padding:9px 10px; border-bottom:1px solid #F0E4C2; }
+  td:first-child, th:first-child{ font-family:'IBM Plex Sans',sans-serif; font-size:13.5px; }
 
-  .callout{
-    background:rgba(169,121,31,0.08); border-left:3px solid var(--gold);
-    padding:14px 18px; border-radius:2px; margin:22px 0;
-  }
-  .callout p{ margin:0; font-size:14.5px; color:var(--ink); }
+  .callout{ background:var(--paper); border:2px solid var(--ink); border-radius:12px; padding:14px 18px; margin:20px 0; }
+  .callout p{ margin:0; font-size:13.5px; }
 
   .cta{
-    margin:34px 0 10px; padding:22px; background:var(--cover); border-radius:3px;
+    margin:30px 0 6px; padding:20px; background:var(--ink); border-radius:14px;
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
   }
-  .cta p{ margin:0; color:#EFE8D3; font-size:14.5px; max-width:38ch; }
+  .cta p{ margin:0; color:#FFF3D0; font-size:13.5px; max-width:38ch; }
   .cta a.btn{
-    text-decoration:none; font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:14px;
-    color:var(--cover); background:var(--gold); padding:11px 20px; border-radius:2px; white-space:nowrap;
+    text-decoration:none; font-family:'Sora',sans-serif; font-weight:700; font-size:13.5px;
+    color:var(--ink); background:var(--sun); padding:10px 18px; border-radius:10px; white-space:nowrap;
   }
+  .updated{ font-size:12px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-top:32px; }
 
-  .updated{ font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-top:36px; }
+  footer{ max-width:700px; margin:20px auto 0; padding:0 20px 30px; color:var(--ink-soft); font-size:12px; text-align:center; line-height:1.6; }
+  footer a{ font-weight:600; text-decoration:underline; }
 
   @media (max-width:600px){
-    .book{ padding:32px 22px; }
+    .site-nav{ display:none; }
+    .card{ padding:26px 22px; }
     table{ font-size:12px; }
   }
 </style>
 </head>
 <body>
-  <div class="book">
-    <a class="mark" href="index.html">← Hisaab Kitab</a>
-    <div class="eyebrow">Income Tax</div>
-    <h1>FBR income tax slabs 2026-27 explained, for salaried individuals</h1>
-    <p class="lede">Pakistan's salary tax rates changed for FY 2026-27, effective 1 July 2026. Here's what the new slabs actually mean for your paycheck, with worked examples.</p>
+  <header class="site-header">
+    <a class="logo" href="index.html"><span class="mark">₨</span><span class="name">Hisaab Kitab</span></a>
+    <nav class="site-nav"><a href="index.html">Calculators</a><a href="index.html#guides-section">Guides</a><a href="about.html">About</a></nav>
+  </header>
 
-    <p>If you're salaried in Pakistan, income tax comes straight off your monthly pay before you ever see it. The government updated the slab structure for FY 2026-27, and the changes are genuinely good news for most salaried people — rates dropped in several brackets, and a 9% surcharge that used to apply above Rs 1 crore has been removed entirely for salaried individuals.</p>
+  <div class="wrap">
+    <div class="card">
+      <span class="eyebrow">Income Tax</span>
+      <h1>FBR income tax slabs 2026-27 explained, for salaried individuals</h1>
+      <p class="lede">Pakistan's salary tax rates changed for FY 2026-27, effective 1 July 2026. Here's what the new slabs actually mean for your paycheck, with worked examples.</p>
 
-    <h2>What changed this year</h2>
-    <p>The Finance Act 2026 restructured the middle and upper tax brackets. The old 23% and 30% rates were cut to 20% and 25%. The top 35% bracket, which previously started at Rs 4.1 million, was split into three narrower bands — 29%, 32%, and 35% — with the full 35% rate now only kicking in above Rs 7 million a year, up from Rs 4.1 million before. The 9% surcharge on high earners is gone.</p>
+      <p>If you're salaried in Pakistan, income tax comes straight off your monthly pay before you ever see it. The government updated the slab structure for FY 2026-27, and the changes are genuinely good news for most salaried people — rates dropped in several brackets, and a 9% surcharge that used to apply above Rs 1 crore has been removed entirely for salaried individuals.</p>
 
-    <h2>The full slab table</h2>
-    <table>
-      <tr><th>Annual taxable income</th><th>Rate</th><th>Fixed amount</th></tr>
-      <tr><td>Up to Rs 600,000</td><td class="num">0%</td><td class="num">—</td></tr>
-      <tr><td>Rs 600,001 – 1,200,000</td><td class="num">1%</td><td class="num">—</td></tr>
-      <tr><td>Rs 1,200,001 – 2,200,000</td><td class="num">11%</td><td class="num">Rs 6,000</td></tr>
-      <tr><td>Rs 2,200,001 – 3,200,000</td><td class="num">20%</td><td class="num">Rs 116,000</td></tr>
-      <tr><td>Rs 3,200,001 – 4,100,000</td><td class="num">25%</td><td class="num">Rs 316,000</td></tr>
-      <tr><td>Rs 4,100,001 – 5,600,000</td><td class="num">29%</td><td class="num">Rs 541,000</td></tr>
-      <tr><td>Rs 5,600,001 – 7,000,000</td><td class="num">32%</td><td class="num">Rs 976,000</td></tr>
-      <tr><td>Above Rs 7,000,000</td><td class="num">35%</td><td class="num">Rs 1,424,000</td></tr>
-    </table>
+      <h2>What changed this year</h2>
+      <p>The Finance Act 2026 restructured the middle and upper tax brackets. The old 23% and 30% rates were cut to 20% and 25%. The top 35% bracket, which previously started at Rs 4.1 million, was split into three narrower bands — 29%, 32%, and 35% — with the full 35% rate now only kicking in above Rs 7 million a year, up from Rs 4.1 million before. The 9% surcharge on high earners is gone.</p>
 
-    <div class="callout">
-      <p><strong>How to read this:</strong> tax is progressive — each rate only applies to the income that falls within that bracket, not your whole salary. The "fixed amount" is the tax already owed from all lower brackets, so you only calculate the top bracket's rate on the amount above its threshold and add the fixed amount.</p>
+      <h2>The full slab table</h2>
+      <table>
+        <tr><th>Annual taxable income</th><th>Rate</th><th>Fixed amount</th></tr>
+        <tr><td>Up to Rs 600,000</td><td class="num">0%</td><td class="num">—</td></tr>
+        <tr><td>Rs 600,001 – 1,200,000</td><td class="num">1%</td><td class="num">—</td></tr>
+        <tr><td>Rs 1,200,001 – 2,200,000</td><td class="num">11%</td><td class="num">Rs 6,000</td></tr>
+        <tr><td>Rs 2,200,001 – 3,200,000</td><td class="num">20%</td><td class="num">Rs 116,000</td></tr>
+        <tr><td>Rs 3,200,001 – 4,100,000</td><td class="num">25%</td><td class="num">Rs 316,000</td></tr>
+        <tr><td>Rs 4,100,001 – 5,600,000</td><td class="num">29%</td><td class="num">Rs 541,000</td></tr>
+        <tr><td>Rs 5,600,001 – 7,000,000</td><td class="num">32%</td><td class="num">Rs 976,000</td></tr>
+        <tr><td>Above Rs 7,000,000</td><td class="num">35%</td><td class="num">Rs 1,424,000</td></tr>
+      </table>
+
+      <div class="callout">
+        <p><strong>How to read this:</strong> tax is progressive — each rate only applies to the income within that bracket, not your whole salary. The "fixed amount" is the tax already owed from lower brackets; add it to the top bracket's calculation.</p>
+      </div>
+
+      <h2>A worked example</h2>
+      <p>Say your annual salary is Rs 3,600,000 (Rs 300,000 a month). That falls in the Rs 3,200,001–4,100,000 bracket, taxed at 25% with a fixed amount of Rs 316,000.</p>
+      <ul>
+        <li>Amount above the bracket threshold: Rs 3,600,000 − Rs 3,200,000 = Rs 400,000</li>
+        <li>Tax on that portion: Rs 400,000 × 25% = Rs 100,000</li>
+        <li>Total annual tax: Rs 316,000 + Rs 100,000 = <strong>Rs 416,000</strong></li>
+        <li>That's roughly Rs 34,667 deducted per month</li>
+      </ul>
+
+      <div class="cta">
+        <p>Skip the manual math — enter your salary and get your exact tax and take-home pay instantly.</p>
+        <a class="btn" href="index.html">Open the tax calculator →</a>
+      </div>
+
+      <h2>A few things to keep in mind</h2>
+      <ul>
+        <li>These slabs apply to <strong>salaried</strong> individuals. Non-salaried and business income is taxed on a separate, generally higher slab table.</li>
+        <li>This covers income tax only — your actual in-hand salary may differ slightly after EOBI, provident fund, or other employer-specific deductions.</li>
+        <li>You're still required to file an annual tax return even if your employer withholds tax correctly throughout the year.</li>
+      </ul>
+
+      <p class="updated">Based on the Finance Act 2026 salaried tax slabs, effective 1 July 2026. Verify against current FBR notifications for anything filing-related, and consult a tax professional for your specific situation.</p>
     </div>
-
-    <h2>A worked example</h2>
-    <p>Say your annual salary is Rs 3,600,000 (Rs 300,000 a month). That falls in the Rs 3,200,001–4,100,000 bracket, taxed at 25% with a fixed amount of Rs 316,000.</p>
-    <ul>
-      <li>Amount above the bracket threshold: Rs 3,600,000 − Rs 3,200,000 = Rs 400,000</li>
-      <li>Tax on that portion: Rs 400,000 × 25% = Rs 100,000</li>
-      <li>Total annual tax: Rs 316,000 + Rs 100,000 = <strong>Rs 416,000</strong></li>
-      <li>That works out to roughly Rs 34,667 deducted per month</li>
-    </ul>
-
-    <h2>What this means for your take-home pay</h2>
-    <p>The lower rates mean most salaried people are keeping more of their income this year compared to FY 2025-26. Someone earning Rs 2,700,000 annually, for instance, would have paid tax at 23% under last year's rules — this year that same bracket is taxed at 20%, a meaningful difference over a full year.</p>
-
-    <p>The removal of the surcharge matters most for higher earners. Previously, anyone earning above Rs 1 crore annually paid an extra 9% on top of their calculated tax. That's gone for salaried individuals starting this fiscal year.</p>
-
-    <div class="cta">
-      <p>Skip the manual math — enter your salary and get your exact tax and take-home pay instantly.</p>
-      <a class="btn" href="index.html">Open the tax calculator →</a>
-    </div>
-
-    <h2>A few things to keep in mind</h2>
-    <ul>
-      <li>These slabs apply to <strong>salaried</strong> individuals. Non-salaried and business income is taxed on a separate, generally higher slab table.</li>
-      <li>This covers income tax only — your actual in-hand salary may differ slightly after EOBI, provident fund, or other employer-specific deductions.</li>
-      <li>Your employer is responsible for withholding the correct tax monthly, but it's worth checking your payslip against these slabs, especially right after a raise that might push you into a new bracket.</li>
-      <li>You're still required to file an annual tax return even if your employer withholds tax correctly throughout the year.</li>
-    </ul>
-
-    <p class="updated">Based on the Finance Act 2026 salaried tax slabs, effective 1 July 2026. Figures reflect the applicable law as of publication — verify against current FBR notifications for anything filing-related, and consult a tax professional for your specific situation.</p>
   </div>
+
+  <footer>
+    Hisaab Kitab · <a href="index.html">All calculators</a> · <a href="about.html">About</a>
+  </footer>
 </body>
 </html>

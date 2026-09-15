@@ -6,7 +6,6 @@
 <title>How to Calculate Zakat in Pakistan — Gold, Cash &amp; Business Assets | Hisaab Kitab</title>
 <meta name="description" content="A plain-language guide to calculating Zakat in Pakistan — what counts as zakatable wealth, the nisab threshold, and worked examples for gold, cash, and business assets.">
 <meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -15,106 +14,123 @@
   gtag('config', 'G-1SSYQEN5KC');
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
   :root{
-    --cover:#16332B; --paper:#FBF7ED; --paper-line:#DED2AC;
-    --ink:#221D14; --ink-soft:#5B5546; --gold:#A9791F; --stamp:#A63D2F;
+    --ink:#1A1400; --sun:#FFC93C; --coral:#FF5C7A; --mint:#3DDC97;
+    --paper:#FFF4D6; --cloud:#FFFFFF; --ink-soft:#6B6248;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--cover); color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif; min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px;
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; }
+  a{ color:var(--ink); }
+
+  .site-header{ display:flex; align-items:center; justify-content:space-between; max-width:1040px; margin:0 auto; padding:22px 20px 8px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .mark{ width:34px; height:34px; background:var(--ink); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--sun); font-family:'Sora',sans-serif; font-weight:800; font-size:16px; transform:rotate(-6deg); }
+  .logo .name{ font-family:'Sora',sans-serif; font-weight:800; font-size:18px; }
+  .site-nav{ display:flex; gap:8px; }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--ink); padding:8px 14px; border-radius:20px; border:2px solid transparent; }
+  .site-nav a:hover{ border-color:var(--ink); }
+
+  .wrap{ max-width:700px; margin:26px auto 0; padding:0 20px 40px; }
+  .eyebrow{
+    display:inline-block; font-size:12px; font-weight:700; background:var(--ink); color:var(--mint);
+    padding:4px 12px; border-radius:20px; margin-bottom:14px;
   }
-  .num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
-  .book{
-    max-width:700px; width:100%; background:var(--paper); border-radius:3px;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55); padding:46px 44px;
-  }
-  a{ color:var(--gold); }
-  .mark{
-    display:inline-block; font-family:'Lora', serif; font-weight:600; font-size:14px;
-    letter-spacing:0.08em; color:var(--gold); text-decoration:none; margin-bottom:22px;
-  }
-  .eyebrow{ font-size:13px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-bottom:10px; }
-  h1{ font-family:'Lora', serif; font-size:30px; line-height:1.25; margin:0 0 14px; }
-  .lede{ font-size:16px; line-height:1.6; color:var(--ink-soft); margin:0 0 30px; }
-  h2{ font-family:'Lora', serif; font-size:21px; margin:36px 0 12px; }
-  p{ font-size:15px; line-height:1.75; color:var(--ink); margin:0 0 16px; }
+  .card{ background:var(--cloud); border:3px solid var(--ink); border-radius:18px; box-shadow:7px 7px 0 var(--ink); padding:36px 34px; }
+  h1{ font-family:'Sora',sans-serif; font-weight:800; font-size:27px; line-height:1.25; margin:0 0 14px; }
+  .lede{ font-size:15.5px; line-height:1.6; color:var(--ink-soft); margin:0 0 26px; }
+  h2{ font-family:'Sora',sans-serif; font-size:19px; font-weight:800; margin:32px 0 12px; }
+  p{ font-size:14.5px; line-height:1.75; color:var(--ink); margin:0 0 16px; }
   ul, ol{ padding-left:22px; margin:0 0 16px; }
-  li{ font-size:15px; line-height:1.7; color:var(--ink); margin-bottom:6px; }
-  hr{ border:none; border-top:1px solid var(--paper-line); margin:32px 0; }
-  .callout{
-    background:rgba(169,121,31,0.08); border-left:3px solid var(--gold);
-    padding:14px 18px; border-radius:2px; margin:22px 0;
-  }
-  .callout p{ margin:0; font-size:14.5px; color:var(--ink); }
+  li{ font-size:14.5px; line-height:1.7; color:var(--ink); margin-bottom:6px; }
+  hr{ border:none; border-top:2px dashed #EEE0BC; margin:28px 0; }
+
+  .callout{ background:var(--paper); border:2px solid var(--ink); border-radius:12px; padding:14px 18px; margin:20px 0; }
+  .callout p{ margin:0; font-size:13.5px; }
+
   .cta{
-    margin:34px 0 10px; padding:22px; background:var(--cover); border-radius:3px;
+    margin:30px 0 6px; padding:20px; background:var(--ink); border-radius:14px;
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
   }
-  .cta p{ margin:0; color:#EFE8D3; font-size:14.5px; max-width:38ch; }
+  .cta p{ margin:0; color:#EAFBF1; font-size:13.5px; max-width:38ch; }
   .cta a.btn{
-    text-decoration:none; font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:14px;
-    color:var(--cover); background:var(--gold); padding:11px 20px; border-radius:2px; white-space:nowrap;
+    text-decoration:none; font-family:'Sora',sans-serif; font-weight:700; font-size:13.5px;
+    color:var(--ink); background:var(--mint); padding:10px 18px; border-radius:10px; white-space:nowrap;
   }
-  .updated{ font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-top:36px; }
-  @media (max-width:600px){ .book{ padding:32px 22px; } }
+  .updated{ font-size:12px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-top:32px; }
+
+  footer{ max-width:700px; margin:20px auto 0; padding:0 20px 30px; color:var(--ink-soft); font-size:12px; text-align:center; line-height:1.6; }
+  footer a{ font-weight:600; text-decoration:underline; }
+
+  @media (max-width:600px){
+    .site-nav{ display:none; }
+    .card{ padding:26px 22px; }
+  }
 </style>
 </head>
 <body>
-  <div class="book">
-    <a class="mark" href="index.html">← Hisaab Kitab</a>
-    <div class="eyebrow">Zakat</div>
-    <h1>How to calculate Zakat in Pakistan: gold, cash, and business assets</h1>
-    <p class="lede">A step-by-step, plain-language walkthrough of who owes Zakat, what counts as zakatable wealth, and how to work out the exact amount.</p>
+  <header class="site-header">
+    <a class="logo" href="index.html"><span class="mark">₨</span><span class="name">Hisaab Kitab</span></a>
+    <nav class="site-nav"><a href="index.html">Calculators</a><a href="index.html#guides-section">Guides</a><a href="about.html">About</a></nav>
+  </header>
 
-    <p>Zakat is one of the five pillars of Islam — an obligatory annual payment of 2.5% on wealth that's been held for a full lunar year (hawl), once it exceeds a minimum threshold called nisab. For many people, the calculation feels more complicated than it needs to be, mainly because it involves totaling up different types of assets rather than just checking one bank balance.</p>
+  <div class="wrap">
+    <div class="card">
+      <span class="eyebrow">Zakat</span>
+      <h1>How to calculate Zakat in Pakistan: gold, cash, and business assets</h1>
+      <p class="lede">A step-by-step, plain-language walkthrough of who owes Zakat, what counts as zakatable wealth, and how to work out the exact amount.</p>
 
-    <h2>Who owes Zakat</h2>
-    <p>Zakat becomes obligatory when your net zakatable wealth — everything you own that qualifies, minus what you owe — exceeds the nisab threshold and has been held for one full lunar year. Not every asset counts, and not every debt is deductible, which is where most of the confusion comes from.</p>
+      <p>Zakat is one of the five pillars of Islam — an obligatory annual payment of 2.5% on wealth that's been held for a full lunar year (hawl), once it exceeds a minimum threshold called nisab. For many people, the calculation feels more complicated than it needs to be, mainly because it involves totaling up different types of assets rather than just checking one bank balance.</p>
 
-    <h2>What counts as zakatable wealth</h2>
-    <ul>
-      <li><strong>Cash and bank balances</strong> — savings accounts, current accounts, cash at home, and money in mobile wallets.</li>
-      <li><strong>Gold and silver</strong> — jewellery, coins, and bullion, valued at current market rates regardless of whether it's worn or stored.</li>
-      <li><strong>Business inventory</strong> — goods held for sale, valued at their current market price, not what you originally paid.</li>
-      <li><strong>Receivables</strong> — money owed to you that you reasonably expect to collect.</li>
-      <li><strong>Investments</strong> — stocks, savings certificates, and similar holdings, generally valued at current market price.</li>
-    </ul>
-    <p>Your personal home, car, furniture, and other items for personal use are not zakatable, even if they're valuable.</p>
+      <h2>Who owes Zakat</h2>
+      <p>Zakat becomes obligatory when your net zakatable wealth — everything you own that qualifies, minus what you owe — exceeds the nisab threshold and has been held for one full lunar year. Not every asset counts, and not every debt is deductible, which is where most of the confusion comes from.</p>
 
-    <h2>What you can deduct</h2>
-    <p>Short-term debts you owe — money due within the year, like a personal loan installment or outstanding bills — are subtracted from your total zakatable wealth before calculating Zakat. Long-term debts (like the remaining 15 years of a home loan) are typically not deducted in full; only the portion due within the current year is commonly subtracted, though scholars differ on the exact treatment, so this is worth confirming with a religious authority for larger, more complex situations.</p>
+      <h2>What counts as zakatable wealth</h2>
+      <ul>
+        <li><strong>Cash and bank balances</strong> — savings accounts, current accounts, cash at home, and money in mobile wallets.</li>
+        <li><strong>Gold and silver</strong> — jewellery, coins, and bullion, valued at current market rates regardless of whether it's worn or stored.</li>
+        <li><strong>Business inventory</strong> — goods held for sale, valued at their current market price, not what you originally paid.</li>
+        <li><strong>Receivables</strong> — money owed to you that you reasonably expect to collect.</li>
+        <li><strong>Investments</strong> — stocks, savings certificates, and similar holdings, generally valued at current market price.</li>
+      </ul>
+      <p>Your personal home, car, furniture, and other items for personal use are not zakatable, even if they're valuable.</p>
 
-    <h2>Understanding nisab</h2>
-    <p>Nisab is the minimum threshold of wealth below which Zakat isn't obligatory. It's traditionally set at either 87.48 grams of gold or 612.36 grams of silver, and you're meant to use whichever value is lower — since silver's value is typically lower than gold's, using the silver-based nisab is more common and is considered more generous to those who receive Zakat, since it brings more people into the obligation.</p>
-    <div class="callout">
-      <p><strong>Practical tip:</strong> since gold and silver prices change daily, check the current nisab value from a trusted local source (Sarafa Bazaar association rates are a common reference in Pakistan) before finalizing your calculation, rather than relying on an old figure.</p>
+      <h2>What you can deduct</h2>
+      <p>Short-term debts you owe — money due within the year, like a personal loan installment or outstanding bills — are subtracted from your total zakatable wealth before calculating Zakat. Long-term debts (like the remaining 15 years of a home loan) are typically not deducted in full; only the portion due within the current year is commonly subtracted, though scholars differ on the exact treatment, so this is worth confirming with a religious authority for larger, more complex situations.</p>
+
+      <h2>Understanding nisab</h2>
+      <p>Nisab is the minimum threshold of wealth below which Zakat isn't obligatory. It's traditionally set at either 87.48 grams of gold or 612.36 grams of silver, and you're meant to use whichever value is lower — since silver's value is typically lower than gold's, using the silver-based nisab is more common and is considered more generous to those who receive Zakat, since it brings more people into the obligation.</p>
+      <div class="callout">
+        <p><strong>Practical tip:</strong> since gold and silver prices change daily, check the current nisab value from a trusted local source (Sarafa Bazaar association rates are a common reference in Pakistan) before finalizing your calculation, rather than relying on an old figure.</p>
+      </div>
+
+      <h2>A worked example</h2>
+      <p>Suppose you have Rs 300,000 in your bank account, gold jewellery worth Rs 400,000, and you owe Rs 50,000 on a personal loan installment due this year.</p>
+      <ul>
+        <li>Total zakatable wealth: Rs 300,000 + Rs 400,000 = Rs 700,000</li>
+        <li>Less short-term debt: Rs 700,000 − Rs 50,000 = Rs 650,000 net zakatable wealth</li>
+        <li>Assuming this exceeds the current nisab threshold, Zakat due: Rs 650,000 × 2.5% = <strong>Rs 16,250</strong></li>
+      </ul>
+
+      <div class="cta">
+        <p>Skip the manual math — enter your assets and get your exact Zakat amount instantly.</p>
+        <a class="btn" href="index.html">Open the Zakat calculator →</a>
+      </div>
+
+      <h2>A few things worth keeping in mind</h2>
+      <ul>
+        <li>Zakat is calculated on wealth held for a full lunar year, not a fixed calendar date — many people choose Ramadan as a consistent, memorable time to calculate and pay it each year.</li>
+        <li>If your wealth fluctuates throughout the year, what matters most is your wealth on the specific date your Zakat year completes.</li>
+        <li>For business Zakat, inventory is valued at current market/resale price, not what you originally paid.</li>
+        <li>This guide covers general principles — for complex situations, consult a qualified religious scholar for a precise ruling.</li>
+      </ul>
+
+      <p class="updated">This guide covers general principles of Zakat calculation and is not a religious ruling (fatwa). For your specific situation, consult a qualified scholar.</p>
     </div>
-
-    <h2>A worked example</h2>
-    <p>Suppose you have Rs 300,000 in your bank account, gold jewellery worth Rs 400,000, and you owe Rs 50,000 on a personal loan installment due this year.</p>
-    <ul>
-      <li>Total zakatable wealth: Rs 300,000 + Rs 400,000 = Rs 700,000</li>
-      <li>Less short-term debt: Rs 700,000 − Rs 50,000 = Rs 650,000 net zakatable wealth</li>
-      <li>Assuming this exceeds the current nisab threshold, Zakat due: Rs 650,000 × 2.5% = <strong>Rs 16,250</strong></li>
-    </ul>
-
-    <div class="cta">
-      <p>Skip the manual math — enter your assets and get your exact Zakat amount instantly.</p>
-      <a class="btn" href="index.html">Open the Zakat calculator →</a>
-    </div>
-
-    <h2>A few things worth keeping in mind</h2>
-    <ul>
-      <li>Zakat is calculated on wealth held for a full lunar year, not a fixed calendar date — many people choose Ramadan as a consistent, memorable time to calculate and pay it each year.</li>
-      <li>If your wealth fluctuates throughout the year, what matters most is your wealth on the specific date your Zakat year completes, not the average across the year.</li>
-      <li>For business Zakat, inventory is valued at current market/resale price, not what you originally paid for it.</li>
-      <li>This guide covers general principles — for complex situations (mixed business partnerships, disputed debts, agricultural produce, etc.), consult a qualified religious scholar for a precise ruling.</li>
-    </ul>
-
-    <p class="updated">This guide covers general principles of Zakat calculation and is not a religious ruling (fatwa). For your specific situation, consult a qualified scholar.</p>
   </div>
+
+  <footer>
+    Hisaab Kitab · <a href="index.html">All calculators</a> · <a href="about.html">About</a>
+  </footer>
 </body>
 </html>

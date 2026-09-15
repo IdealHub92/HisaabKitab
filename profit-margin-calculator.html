@@ -6,7 +6,6 @@
 <title>Profit Margin Calculator — Cost, Markup &amp; Margin | Hisaab Kitab</title>
 <meta name="description" content="Calculate your profit margin, markup percentage, and profit amount from cost price and selling price. Free calculator for shop owners and small businesses in Pakistan.">
 <meta name="google-site-verification" content="IwTqPPjywtGz1IdvcccgyLyuj_soSixiV_cKMhEganc" />
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1SSYQEN5KC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -15,144 +14,110 @@
   gtag('config', 'G-1SSYQEN5KC');
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
   :root{
-    --cover:#16332B; --cover-deep:#0E241E; --paper:#FBF7ED; --paper-line:#DED2AC;
-    --ink:#221D14; --ink-soft:#5B5546; --gold:#A9791F; --gold-deep:#82600F; --stamp:#A63D2F;
+    --ink:#1A1400; --sun:#FFC93C; --coral:#FF5C7A; --mint:#3DDC97;
+    --paper:#FFF4D6; --cloud:#FFFFFF; --ink-soft:#6B6248;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--cover);
-    background-image: radial-gradient(ellipse at top left, rgba(255,255,255,0.04), transparent 60%),
-      radial-gradient(ellipse at bottom right, rgba(0,0,0,0.25), transparent 55%);
-    color:var(--ink); font-family:'IBM Plex Sans', sans-serif; min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px;
-  }
-  .num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; min-height:100vh; }
+  .num{ font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; }
+  a{ color:inherit; }
 
-  .titleblock{ max-width:700px; width:100%; text-align:left; color:#EFE8D3; margin-bottom:22px; padding:0 6px; }
-  .titleblock .mark{
-    display:inline-block; font-family:'Lora', serif; font-weight:600; font-size:14px;
-    letter-spacing:0.08em; color:var(--gold); text-decoration:none; margin-bottom:14px;
-  }
-  .titleblock h1{
-    font-family:'Lora', serif; font-weight:700; font-size:clamp(26px, 4.5vw, 36px);
-    margin:0 0 8px; color:#F7F1DE; line-height:1.2;
-  }
-  .titleblock p{ font-size:15px; line-height:1.55; color:#C9C2AA; max-width:56ch; margin:0; }
+  .site-header{ display:flex; align-items:center; justify-content:space-between; max-width:1040px; margin:0 auto; padding:22px 20px 8px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .mark{ width:34px; height:34px; background:var(--ink); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--sun); font-family:'Sora',sans-serif; font-weight:800; font-size:16px; transform:rotate(-6deg); }
+  .logo .name{ font-family:'Sora',sans-serif; font-weight:800; font-size:18px; }
+  .site-nav{ display:flex; gap:8px; }
+  .site-nav a{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--ink); padding:8px 14px; border-radius:20px; border:2px solid transparent; }
+  .site-nav a:hover{ border-color:var(--ink); }
 
-  .book{
-    max-width:700px; width:100%; background:var(--paper); border-radius:3px;
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55), 0 2px 0 rgba(0,0,0,0.2);
-    position:relative; overflow:hidden;
-  }
-  .book::before{
-    content:""; position:absolute; left:0; top:0; bottom:0; width:46px;
-    background: repeating-linear-gradient(to right, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 46px);
-    opacity:0.5; pointer-events:none;
-  }
-  .page{ padding:36px 40px 34px; position:relative; }
-  form{ padding-left:52px; }
+  .pagehead{ max-width:700px; margin:20px auto 0; padding:0 20px; }
+  .pagehead h1{ font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(26px,4vw,34px); margin:0 0 8px; }
+  .pagehead p{ font-size:14.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
 
-  .row{
-    display:grid; grid-template-columns: 1fr 200px; align-items:baseline;
-    gap:16px; padding:13px 0; border-bottom:1px solid var(--paper-line);
-  }
-  .row label{ font-size:14.5px; color:var(--ink); font-weight:500; }
-  .row .hint{ display:block; font-size:12.5px; color:var(--ink-soft); font-weight:400; margin-top:2px; }
-  .row .field{ display:flex; align-items:center; border-bottom:1.5px solid var(--ink); padding-bottom:3px; }
-  .row .field .prefix{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft); margin-right:6px; }
-  .row input, .row select{
-    border:none; background:transparent; outline:none; font-family:'IBM Plex Mono', monospace;
-    font-size:16px; color:var(--ink); width:100%; text-align:right; padding:2px 0;
-  }
+  .toolbox{ max-width:700px; margin:22px auto 0; padding:0 20px; }
+  .card{ background:var(--cloud); border:3px solid var(--ink); border-radius:18px; box-shadow:7px 7px 0 var(--ink); padding:28px 26px 24px; }
+  .field-row{ display:grid; grid-template-columns:1fr 170px; align-items:baseline; gap:16px; padding:12px 0; border-bottom:2px dashed #EEE0BC; }
+  .field-row label{ font-size:14px; font-weight:600; }
+  .field-box{ display:flex; align-items:center; background:var(--paper); border:2px solid var(--ink); border-radius:10px; padding:8px 12px; }
+  .field-box .prefix{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-soft); margin-right:6px; }
+  .field-row input{ border:none; background:transparent; outline:none; font-family:'IBM Plex Mono',monospace; font-size:15px; color:var(--ink); width:100%; text-align:right; font-weight:600; }
 
-  .result{ margin:30px 52px 0; padding-top:22px; border-top:2px solid var(--ink); display:none; }
-  .result.show{ display:block; animation: rise 0.45s ease; }
-  @keyframes rise{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+  .result{ margin-top:24px; padding-top:20px; border-top:3px solid var(--ink); }
   .result-main{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px; }
-  .result-main .label{ font-family:'Lora', serif; font-size:15px; color:var(--ink-soft); }
-  .result-main .amount{
-    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:34px; color:var(--stamp); position:relative;
-  }
-  .result-main .amount::after{
-    content:""; position:absolute; left:-8px; right:-8px; bottom:2px; top:2px;
-    border:2px solid var(--stamp); border-radius:3px; opacity:0.35; transform:rotate(-1.2deg); pointer-events:none;
-  }
-  .breakdown{ margin-top:20px; width:100%; border-collapse:collapse; }
-  .breakdown tr td{ padding:8px 0; font-size:13.5px; border-bottom:1px solid var(--paper-line); }
-  .breakdown tr td:first-child{ color:var(--ink-soft); }
-  .breakdown tr td:last-child{ font-family:'IBM Plex Mono', monospace; text-align:right; color:var(--ink); }
-  .breakdown tr.total td{ border-bottom:none; padding-top:12px; font-weight:600; }
-  .note{ margin:18px 52px 0; font-size:12.5px; color:var(--ink-soft); line-height:1.5; padding-bottom:8px; }
+  .result-main .label{ font-family:'Sora',sans-serif; font-size:14px; font-weight:600; color:var(--ink-soft); }
+  .result-main .amount{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:32px; color:var(--coral); }
+  .breakdown{ margin-top:18px; width:100%; border-collapse:collapse; }
+  .breakdown tr td{ padding:8px 0; font-size:13px; border-bottom:1px solid #F0E4C2; }
+  .breakdown tr td:first-child{ color:var(--ink-soft); font-weight:500; }
+  .breakdown tr td:last-child{ font-family:'IBM Plex Mono',monospace; text-align:right; font-weight:600; }
+  .breakdown tr.total td{ border-bottom:none; padding-top:12px; font-weight:800; }
+  .note{ margin-top:16px; font-size:12px; color:var(--ink-soft); line-height:1.5; }
 
-  .explainer{ max-width:700px; width:100%; background:var(--paper); border-radius:3px; margin-top:24px; padding:34px 40px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.5); }
-  .explainer h2{ font-family:'Lora', serif; font-size:19px; margin:0 0 10px; }
-  .explainer p{ font-size:14.5px; line-height:1.7; color:var(--ink); margin:0 0 14px; }
-  .explainer ul{ padding-left:20px; margin:0 0 14px; }
-  .explainer li{ font-size:14.5px; line-height:1.7; color:var(--ink); margin-bottom:6px; }
+  .explainer{ max-width:700px; margin:22px auto 0; padding:0 20px; }
+  .explainer .inner{ background:var(--cloud); border:2.5px solid var(--ink); border-radius:14px; padding:24px 26px; }
+  .explainer h2{ font-family:'Sora',sans-serif; font-size:18px; font-weight:800; margin:0 0 10px; }
+  .explainer p{ font-size:14px; line-height:1.65; margin:0 0 12px; color:var(--ink); }
+  .explainer ul{ padding-left:20px; margin:0; }
+  .explainer li{ font-size:14px; line-height:1.65; margin-bottom:6px; }
 
-  footer{ max-width:700px; width:100%; color:#8F8975; font-size:12px; text-align:center; line-height:1.6; margin-top:28px; padding:0 16px; }
-  footer a{ color:var(--gold); }
+  footer{ max-width:700px; margin:34px auto 0; padding:20px; color:var(--ink-soft); font-size:12px; text-align:center; line-height:1.6; }
+  footer a{ color:var(--ink); font-weight:600; text-decoration:underline; }
 
   @media (max-width:600px){
-    .page{ padding:28px 18px 26px; }
-    form{ padding-left:0; }
-    .row{ grid-template-columns:1fr; gap:8px; }
-    .result{ margin:26px 0 0; }
-    .note{ margin:16px 0 0; }
-    .explainer{ padding:26px 20px; }
+    .site-nav{ display:none; }
+    .field-row{ grid-template-columns:1fr; gap:8px; }
+    .card{ padding:20px 18px; }
   }
 </style>
 </head>
 <body>
+  <header class="site-header">
+    <a class="logo" href="index.html"><span class="mark">₨</span><span class="name">Hisaab Kitab</span></a>
+    <nav class="site-nav"><a href="index.html">Calculators</a><a href="index.html#guides-section">Guides</a><a href="about.html">About</a></nav>
+  </header>
 
-  <div class="titleblock">
-    <a class="mark" href="index.html">← Hisaab Kitab</a>
+  <div class="pagehead">
     <h1>Profit margin calculator</h1>
-    <p>Enter your cost and selling price to instantly see your profit, margin percentage, and markup percentage — updates as you type.</p>
+    <p>Enter your cost and selling price to instantly see your profit, margin percentage, and markup percentage.</p>
   </div>
 
-  <div class="book">
-    <section class="page">
+  <div class="toolbox">
+    <div class="card">
       <form id="form-margin">
-        <div class="row">
-          <label>Cost price<span class="hint">What it costs you to buy or produce one unit</span></label>
-          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-cost" placeholder="0" min="0"></div>
+        <div class="field-row">
+          <label>Cost price</label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-cost" placeholder="0" min="0"></div>
         </div>
-        <div class="row">
-          <label>Selling price<span class="hint">What you sell it for</span></label>
-          <div class="field"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-sell" placeholder="0" min="0"></div>
+        <div class="field-row">
+          <label>Selling price</label>
+          <div class="field-box"><span class="prefix">Rs</span><input type="number" inputmode="decimal" id="p-sell" placeholder="0" min="0"></div>
         </div>
       </form>
-      <div class="result show" id="result-margin">
-        <div class="result-main">
-          <span class="label">Profit per unit</span>
-          <span class="amount num" id="p-profit">Rs 0</span>
-        </div>
+      <div class="result show">
+        <div class="result-main"><span class="label">Profit per unit</span><span class="amount num" id="p-profit">Rs 0</span></div>
         <table class="breakdown">
           <tr><td>Profit margin</td><td class="num" id="p-margin">0%</td></tr>
           <tr><td>Markup</td><td class="num" id="p-markup">0%</td></tr>
-          <tr class="total"><td>Break-even selling price</td><td class="num" id="p-breakeven">Rs 0</td></tr>
         </table>
       </div>
-      <p class="note">Margin is profit as a percentage of selling price. Markup is profit as a percentage of cost price — the two numbers are different and often confused. Both are shown above.</p>
-    </section>
+      <p class="note">Margin is profit as a percentage of selling price. Markup is profit as a percentage of cost price — the two are different and often confused.</p>
+    </div>
   </div>
 
   <div class="explainer">
-    <h2>Margin vs. markup — what's the difference?</h2>
-    <p>These two terms get mixed up constantly, and the difference actually matters for pricing decisions. <strong>Margin</strong> is your profit as a percentage of the selling price — it tells you what portion of each sale is profit. <strong>Markup</strong> is your profit as a percentage of the cost price — it tells you how much you added on top of what you paid.</p>
-    <p>For example, if something costs you Rs 100 and you sell it for Rs 150: your profit is Rs 50. Your margin is 33% (50 ÷ 150), but your markup is 50% (50 ÷ 100). Using the wrong one when setting prices is a common way small businesses accidentally underprice their products.</p>
-    <ul>
-      <li>If you're aiming for a specific margin, calculate the required markup separately — they're not interchangeable.</li>
-      <li>Factor in all costs, not just the direct purchase cost — packaging, delivery, and wastage all eat into your real margin.</li>
-      <li>Compare your margin against your industry's typical range, since acceptable margins vary widely by sector (retail vs. food service vs. wholesale, for instance).</li>
-    </ul>
+    <div class="inner">
+      <h2>Margin vs. markup — what's the difference?</h2>
+      <p><strong>Margin</strong> is your profit as a percentage of the selling price. <strong>Markup</strong> is your profit as a percentage of the cost price. If something costs Rs 100 and sells for Rs 150, your profit is Rs 50 — that's a 33% margin but a 50% markup.</p>
+      <ul>
+        <li>If you're aiming for a specific margin, calculate the required markup separately — they're not interchangeable.</li>
+        <li>Factor in all costs, not just the direct purchase cost — packaging, delivery, and wastage all eat into your real margin.</li>
+      </ul>
+    </div>
   </div>
 
   <footer>
-    Estimates only — not professional financial advice.<br>
     Hisaab Kitab · <a href="index.html">All calculators</a> · <a href="about.html">About</a>
   </footer>
 
@@ -161,17 +126,13 @@
     const cost = +document.getElementById('p-cost').value || 0;
     const sell = +document.getElementById('p-sell').value || 0;
     const profit = sell - cost;
-    const margin = sell > 0 ? (profit / sell) * 100 : 0;
-    const markup = cost > 0 ? (profit / cost) * 100 : 0;
-
+    const margin = sell > 0 ? (profit/sell)*100 : 0;
+    const markup = cost > 0 ? (profit/cost)*100 : 0;
     document.getElementById('p-profit').textContent = 'Rs ' + Math.round(profit).toLocaleString('en-PK');
     document.getElementById('p-margin').textContent = margin.toFixed(1) + '%';
     document.getElementById('p-markup').textContent = markup.toFixed(1) + '%';
-    document.getElementById('p-breakeven').textContent = 'Rs ' + Math.round(cost).toLocaleString('en-PK');
   }
-  ['p-cost','p-sell'].forEach(id=>{
-    document.getElementById(id).addEventListener('input', calcMargin);
-  });
+  ['p-cost','p-sell'].forEach(id=>document.getElementById(id).addEventListener('input',calcMargin));
 </script>
 </body>
 </html>
