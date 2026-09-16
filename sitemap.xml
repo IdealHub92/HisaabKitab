@@ -44,4 +44,16 @@
     <loc>https://hisaabkitab.net/break-even-calculator.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://hisaabkitab.net/contact.html</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://hisaabkitab.net/terms.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hisaabkitab.net/disclaimer.html</loc>
+    <priority>0.4</priority>
+  </url>
 </urlset>
