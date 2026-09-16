@@ -44,24 +44,4 @@
     <loc>https://hisaabkitab.net/break-even-calculator.html</loc>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://hisaabkitab.net/zakat-calculator.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hisaabkitab.net/income-tax-calculator.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hisaabkitab.net/emi-calculator.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hisaabkitab.net/salary-calculator.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hisaabkitab.net/currency-converter.html</loc>
-    <priority>0.9</priority>
-  </url>
 </urlset>
